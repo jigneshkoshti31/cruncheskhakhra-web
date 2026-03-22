@@ -1,12 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Roboto } from "next/font/google";
+import Header from "@/components/global/header/Header";
+import Footer from "@/components/global/footer/Footer";
 
-const roboto = Roboto({
-  weight: ["400", "700", "900", "300", "100"],
-  style: ["normal", "italic"],
+const poppins = Poppins({
   subsets: ["latin"],
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-playfair",
 });
 
 export const metadata = {
@@ -17,11 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        // className={cn(roboto.className, '')}
-        className={(roboto.className, '')}
-      >
+      <body className={`${poppins.variable} ${playfair.variable} font-sans bg-gray-50 text-gray-800 antialiased selection:bg-primary_color selection:text-white`}>
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

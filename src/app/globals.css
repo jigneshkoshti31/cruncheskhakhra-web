@@ -1,26 +1,68 @@
 @import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary_color: #F4B618;
+  --color-primary_light: #fde68a;
+  --color-primary_dark: #b45309;
+  --color-primary-hover: #BF27D7;
+  --color-green_color: #01572E;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+    }
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-poppins), sans-serif;
+}
+/* .heading:after {
+    background: #F4B618;
+    content: '';
+    display: block;
+    height: 3px;
+    width: 60px;
+    margin-top: 7px;
+} */
+
+.heading:after {
+    background: none repeat scroll 0 0 transparent;
+    content: '';
+    display: block;
+    height: 2px;
+    background: #F4B618;
+    transition: width 0.2s ease 0s, left 0.2s ease 0s;
+    width: 0;
+}
+
+.heading:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #F4B618;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #014022;
 }
