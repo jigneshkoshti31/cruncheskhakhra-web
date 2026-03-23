@@ -18,7 +18,7 @@ import {
 // --- DYNAMIC DATA ---
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
+  { name: "About Us", path: "/user/about-us" },
   { name: "Products", path: "/products", hasMegaMenu: true },
   { name: "Shop", path: "/shop" },
   { name: "Contact Us", path: "/contact" },
@@ -151,7 +151,7 @@ const Header = () => {
                                 <ul className="space-y-3">
                                   {group.items.map((item, itemIdx) => (
                                     <li key={itemIdx}>
-                                      <Link href={`/products/${item.toLowerCase().replace(/ /g, "-")}`} className="text-gray-500 hover:text-yellow-500 text-sm transition-colors flex items-center gap-1 group/item">
+                                      <Link href={`/products/${item.toLowerCase().replace(/ /g, "-")}`} className="text-gray-500 hover:text-yellow-500 hover:font-semibold text-sm transition-colors flex items-center gap-1 group/item">
                                         <span className="w-0 overflow-hidden group-hover/item:w-3 transition-all duration-300 ease-out"><ArrowRight className="w-3 h-3 mr-1" /></span>
                                         {item}
                                       </Link>
