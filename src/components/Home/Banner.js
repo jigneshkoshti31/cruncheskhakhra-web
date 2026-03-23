@@ -1,10 +1,15 @@
 import React from "react";
 import Image from "next/image";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+});
 
 const Banner = () => {
   return (
     <section className="relative h-[90vh] flex items-center overflow-hidden">
-      
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -21,16 +26,18 @@ const Banner = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-left">
-        
         {/* Tag */}
         <span className="bg-primary_color text-white px-3 py-1 rounded-full text-sm font-medium tracking-wide inline-block mb-4">
           100% Natural & Healthy
         </span>
 
         {/* Heading */}
-        <h1 className="text-5xl md:text-6xl font-serif font-bold text-white leading-tight mb-4 drop-shadow-lg">
+        <h1
+          className={`${playfair.className} text-5xl md:text-7xl font-bold text-white leading mb-4 drop-shadow-lg`}
+        >
           Experience the <br />
-          <span className="text-primary_light italic">Real Taste of</span> <br />
+          <span className="text-primary_light italic">Real Taste of</span>{" "}
+          <br />
           Gujarati Khakhra
         </h1>
 
@@ -41,7 +48,6 @@ const Banner = () => {
 
         {/* Buttons */}
         <div className="flex space-x-4">
-          
           <a
             href="#"
             className="bg-primary_color hover:bg-primary_dark text-white px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl"
@@ -55,7 +61,6 @@ const Banner = () => {
           >
             Explore Flavours
           </a>
-
         </div>
       </div>
     </section>

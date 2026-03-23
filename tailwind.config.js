@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-poppins)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
+        sans: ["Poppins", "sans-serif"],
+        serif: ["Playfair Display", "serif"],
       },
       boxShadow: {
         lg: "0 0px 15px -3px rgb(0 0 0 / 0.13), 0 0px 6px -2px rgb(0 0 0 / 0.16)",
@@ -32,6 +32,7 @@ module.exports = {
         primary_dark: "#b45309",
         "primary-hover": "#BF27D7",
         green_color: "#01572E",
+        green_light: "#047857",
       },
       keyframes: {
         "accordion-down": {
