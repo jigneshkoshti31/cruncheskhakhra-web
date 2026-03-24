@@ -443,7 +443,7 @@ const ProductListing = () => {
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
-                className="w-10 h-10 rounded-full border border-gray-200 disabled:opacity-30 hover:bg-gray-50 flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-full border border-gray-200 disabled:cursor-not-allowed disabled:opacity-30 hover:bg-gray-50 flex items-center justify-center transition-all"
               >
                 <svg
                   className="w-5 h-5"
