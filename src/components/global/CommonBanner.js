@@ -32,7 +32,7 @@ const CommonBannerPage = ({ title, image, decs }) => {
         height={200}
         className="object-cover h-full w-full"
       />
-      <div className= "absolute flex flex-col justify-center items-center  -translate-x-1/2 -translate-y-1/2 md:text-4xl top-1/2 left-1/2">
+      <div className= "absolute w-full flex flex-col justify-center items-center  -translate-x-1/2 -translate-y-1/2 md:text-4xl top-1/2 left-1/2">
         <h1 className="text-2xl font-bold tracking-wide text-center text-white uppercase" >{title}</h1>
         <p className="text-lg text-center text-white">{decs}</p>
       </div>

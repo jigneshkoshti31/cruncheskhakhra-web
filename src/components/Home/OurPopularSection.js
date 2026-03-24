@@ -168,6 +168,7 @@
 
 import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
+import Link from "next/link";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -284,12 +285,12 @@ const PopularKhakhraSection = () => {
 
         {/* Button */}
         <div className="text-center mt-12">
-          <a
-            href="#"
+          <Link
+            href="/user/product"
             className="inline-block border-2 border-primary_color text-primary_color font-semibold px-8 py-3 rounded-full hover:bg-primary_color hover:text-white transition duration-300"
           >
             View All Flavours
-          </a>
+          </Link>
         </div>
       </div>
     </section>
