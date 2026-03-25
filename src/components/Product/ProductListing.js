@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // --- MOCK DATA ---
 const MOCK_PRODUCTS = [
@@ -260,7 +261,9 @@ const ProductListing = () => {
         {/* --- SIDEBAR FILTERS --- */}
         <aside className="w-full lg:w-1/4 shrink-0">
           <div className="bg-white p-3 md:p-6 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 sticky top-24">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 md:mb-6">Filters</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-3 md:mb-6">
+              Filters
+            </h2>
 
             {/* Flavors Filter */}
             <div className="mb-4 md:mb-8">
@@ -469,58 +472,62 @@ const ProductListing = () => {
 
 // --- SUB-COMPONENTS (Card & Skeleton) ---
 const ProductCard = ({ product }) => (
-  <div className="group bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-    <div className="relative w-full aspect-square bg-gray-50 rounded-xl mb-4 overflow-hidden">
-      <Image
-        src={product.image}
-        alt={product.name}
-        fill
-        className="object-cover group-hover:scale-110 transition-transform duration-700"
-      />
-    </div>
-    <div className="flex-1">
-      <h3 className="md:text-lg text-base font-bold text-gray-800 line-clamp-1">
-        {product.name}
-      </h3>
-      <p className="text-sm text-gray-500 mt-1 line-clamp-1">{product.desc}</p>
-      <div className="flex items-center gap-1 mt-2 mb-4 text-sm font-medium text-gray-700">
-        <svg
-          className="w-4 h-4 text-yellow-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-        {product.rating}{" "}
-        <span className="text-gray-400 text-xs">({product.reviews})</span>
+  <Link href={`/user/product-details/${product.id}`}>
+    <div className="group bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+      <div className="relative w-full aspect-square bg-gray-50 rounded-xl mb-4 overflow-hidden">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-cover group-hover:scale-110 transition-transform duration-700"
+        />
+      </div>
+      <div className="flex-1">
+        <h3 className="md:text-lg text-base font-bold text-gray-800 line-clamp-1">
+          {product.name}
+        </h3>
+        <p className="text-sm text-gray-500 mt-1 line-clamp-1">
+          {product.desc}
+        </p>
+        <div className="flex items-center gap-1 mt-2 mb-4 text-sm font-medium text-gray-700">
+          <svg
+            className="w-4 h-4 text-yellow-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+          {product.rating}{" "}
+          <span className="text-gray-400 text-xs">({product.reviews})</span>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-auto md:pt-4 pt-2 border-t border-gray-50">
+        <div>
+          <span className="text-xl font-bold text-[#C8102E]">
+            ₹{product.price}
+          </span>
+          <span className="ml-2 text-sm text-gray-400 line-through">
+            ₹{product.oldPrice}
+          </span>
+        </div>
+        <button className="w-10 h-10 rounded-full bg-[#FBC02D] text-white flex items-center justify-center hover:bg-[#f9a825] transition-colors shadow-md">
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+        </button>
       </div>
     </div>
-    <div className="flex justify-between items-center mt-auto md:pt-4 pt-2 border-t border-gray-50">
-      <div>
-        <span className="text-xl font-bold text-[#C8102E]">
-          ₹{product.price}
-        </span>
-        <span className="ml-2 text-sm text-gray-400 line-through">
-          ₹{product.oldPrice}
-        </span>
-      </div>
-      <button className="w-10 h-10 rounded-full bg-[#FBC02D] text-white flex items-center justify-center hover:bg-[#f9a825] transition-colors shadow-md">
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
-      </button>
-    </div>
-  </div>
+  </Link>
 );
 
 const SkeletonCard = () => {

@@ -20,7 +20,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/user/about-us" },
   { name: "Products", path: "/user/product", hasMegaMenu: true },
-  { name: "Shop", path: "/" },
+  { name: "Shop", path: "" },
   { name: "Contact Us", path: "/user/contact-us" },
 ];
 
@@ -246,13 +246,17 @@ const Header = () => {
 
             {/* Desktop Icons - Keep as is */}
             <div className="flex items-center space-x-4 md:space-x-6 text-gray-700">
-              <button className="hover:text-yellow-500 transition transform hover:scale-110 hidden md:block">
-                <Search className="w-5 h-5" />
-              </button>
-              <button className="hover:text-yellow-500 transition transform hover:scale-110 hidden md:block">
-                <User className="w-5 h-5" />
-              </button>
-              <button className="hover:text-yellow-500 transition transform hover:scale-110 relative">
+              <div className="hidden md:block">
+                <button className="shrink-0 mt-1 bg-[#F5F2FF] w-10 h-10 text-center flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 ">
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="hidden md:block">
+                <button className="shrink-0 mt-1 bg-[#FFF3EC] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 ">
+                  <User className="w-5 h-5" />
+                </button>
+              </div>
+              <button className="shrink-0 mt-1 bg-orange-100 w-10 h-10 flex  items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
                 <ShoppingCart className="w-5 h-5" />
                 <span className="absolute -top-2 -right-2 bg-yellow-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
                   2

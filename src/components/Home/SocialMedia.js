@@ -58,6 +58,34 @@ const columns = [
       },
     ],
   },
+  {
+    id: 5,
+    width: "w-[240px]",
+    layout: [
+      { type: "single", height: "h-[180px]", img: "/img/social-img/22.jpg" },
+      {
+        type: "single",
+        height: "h-[320px]",
+        img: "/img/social-img/25.jpg.jpeg",
+      },
+    ],
+  },
+  {
+    id: 6,
+    width: "w-[240px]",
+    layout: [
+      { type: "single", height: "h-[280px]", img: "/img/social-img/26.jpg" },
+      { type: "single", height: "h-[220px]", img: "/img/social-img/8.jpg" },
+    ],
+  },
+  {
+    id: 7,
+    width: "w-[240px]",
+    layout: [
+      { type: "single", height: "h-[220px]", img: "/img/social-img/26.jpg" },
+      { type: "single", height: "h-[280px]", img: "/img/social-img/8.jpg" },
+    ],
+  },
 ];
 
 const SocialMedia = () => {
