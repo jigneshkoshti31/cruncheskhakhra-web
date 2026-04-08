@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ArrowRight,
 } from "lucide-react";
+import { useCart } from "@/components/context/CartContext";
 
 // --- DYNAMIC DATA ---
 const navLinks = [
@@ -62,6 +63,9 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false); // New state for scroll
 
+
+  const { cartCount } = useCart();
+
   // Scroll detect karne ke liye logic
   useEffect(() => {
     const handleScroll = () => {
@@ -106,11 +110,11 @@ const Header = () => {
               <span>+91 76001 67002</span>
             </div>
             <a
-              href="mailto:info.cruncheskhakhra@gmail.com"
+              href="mailto:hello@cruncheskhakhra.com"
               className="hidden md:flex hover:text-white items-center transition cursor-pointer font-medium"
             >
               <Mail className="mr-1.5 w-4 h-4" />
-              info.cruncheskhakhra@gmail.com
+              hello@cruncheskhakhra.com
             </a>
           </div>
           <div className="items-center md:block hidden justify-center space-x-4 font-medium">
@@ -256,12 +260,16 @@ const Header = () => {
                   <User className="w-5 h-5" />
                 </button>
               </div>
+              <Link href="/user/cart">
               <button className="shrink-0 mt-1 bg-orange-100 w-10 h-10 flex  items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
                 <ShoppingCart className="w-5 h-5" />
-                <span className="absolute -top-2 -right-2 bg-yellow-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                  2
+                {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-yellow-500 text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                 {cartCount}
                 </span>
+                )}
               </button>
+              </Link>
               <button
                 className="lg:hidden text-gray-700 hover:text-yellow-500 transition"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

@@ -2,37 +2,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import CommonBannerPage from "@/components/global/CommonBanner";
+import { useCart } from "@/components/context/CartContext";
+import Link from "next/link";
 
 const ShoppingCartPage = () => {
   const [loading, setLoading] = useState(true);
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Plain Khakhra",
-      variant: "Regular",
-      price: 200,
-      quantity: 1,
-      image: "/img/social-img/22.jpg",
-    },
-    {
-      id: 2,
-      name: "Masala Khakhra",
-      variant: "Mobile",
-      price: 125,
-      quantity: 1,
-      image: "/img/social-img/26.jpg",
-    },
-    {
-      id: 3,
-      name: "Methi Khakhra",
-      variant: "Coin",
-      price: 310,
-      quantity: 3,
-      image: "/img/social-img/17.jpg",
-    },
-  ]);
-
   const [showPopup, setShowPopup] = useState(false);
+  const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
 
   // 1. Skeleton Loader Timer
   useEffect(() => {
@@ -52,27 +28,23 @@ const ShoppingCartPage = () => {
     };
   }, [showPopup]);
 
-  // Handlers
   const increaseQty = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    );
+    const item = cartItems.find((i) => i.id === id);
+    updateQuantity(id, item.quantity + 1);
   };
 
   const decreaseQty = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item,
-      ),
-    );
+    const item = cartItems.find((i) => i.id === id);
+    if (item.quantity > 1) {
+      updateQuantity(id, item.quantity - 1);
+    }
   };
 
-  const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  const handleOrderWhatsapp = () => {
+    if (cartItems.length === 0) return;
+    setShowPopup(true);
+    // 3. Cart clear karein taaki header count 0 ho jaye
+    clearCart();
   };
 
   // Calculations
@@ -84,11 +56,11 @@ const ShoppingCartPage = () => {
   const tax = 0;
   const totalAmount = subTotal > 0 ? subTotal + shippingCharges + tax : 0;
 
-  const handleOrderWhatsapp = () => {
-    if (cartItems.length === 0) return;
-    setShowPopup(true);
-    setCartItems([]);
-  };
+  // const handleOrderWhatsapp = () => {
+  //   if (cartItems.length === 0) return;
+  //   setShowPopup(true);
+  //  clearCart();
+  // };
 
   // Skeleton UI Component
   const SkeletonRow = () => (
@@ -114,10 +86,10 @@ const ShoppingCartPage = () => {
         decs="Review your crispy snacks before checkout."
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row gap-8 text-gray-800">
+      <div className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8 md:py-12 py-8">
+        <div className="flex flex-col lg:flex-row md:gap-8 gap-4 text-gray-800">
           {/* Left Side - Items */}
-          <div className="w-full lg:w-2/3 bg-white shadow-sm border border-gray-100 rounded-xl p-6">
+          <div className="w-full lg:w-2/3 bg-white shadow-sm border border-gray-100 rounded-xl md:p-6 p-3 ">
             <div className="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-gray-200 font-semibold text-gray-800 uppercase text-xs tracking-wider">
               <div className="col-span-5">Product</div>
               <div className="col-span-2 text-center">Price</div>
@@ -135,7 +107,7 @@ const ShoppingCartPage = () => {
                 cartItems.map((item) => (
                   <div
                     key={item.id}
-                    className="py-6 flex flex-col md:grid md:grid-cols-12 gap-4 items-center group transition-all duration-300"
+                    className="py-4 md:py-6 flex flex-col md:grid md:grid-cols-12 gap-3 md:gap-4 items-start md:items-center group transition-all duration-300 bg-gray-50 md:bg-transparent rounded-lg md:rounded-none p-3 md:p-0"
                   >
                     <div className="col-span-5 flex items-center gap-4 w-full">
                       <div className="w-20 h-20 relative shrink-0 border border-gray-100 rounded-lg overflow-hidden">
@@ -152,11 +124,11 @@ const ShoppingCartPage = () => {
                       </div>
                     </div>
 
-                    <div className="col-span-2 text-center font-medium">
+                    <div className="col-span-2 text-center font-medium hidden md:block">
                       ₹{item.price.toFixed(2)}
                     </div>
 
-                    <div className="col-span-2 flex justify-center">
+                    <div className="col-span-2 flex justify-center hidden md:flex">
                       <div className="flex items-center border border-gray-200 rounded-lg h-9 w-28 overflow-hidden">
                         <button
                           onClick={() => decreaseQty(item.id)}
@@ -176,13 +148,13 @@ const ShoppingCartPage = () => {
                       </div>
                     </div>
 
-                    <div className="col-span-2 text-right font-bold text-[#C0392B]">
+                    <div className="col-span-2 text-right font-bold text-[#C0392B] hidden md:block">
                       ₹{(item.price * item.quantity).toFixed(2)}
                     </div>
 
-                    <div className="col-span-1 text-right">
+                    <div className="col-span-1 text-right hidden md:block">
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeFromCart(item.id)}
                         className="text-gray-300 hover:text-red-500 transition-colors p-2 "
                       >
                         <svg
@@ -202,12 +174,74 @@ const ShoppingCartPage = () => {
                         </svg>
                       </button>
                     </div>
+                    <div className="w-full flex items-center justify-between md:hidden mt-3 gap-2">
+
+  {/* Price */}
+  <div className="text-sm font-medium">
+    ₹{item.price.toFixed(2)}
+  </div>
+
+  {/* Quantity */}
+  <div className="flex items-center border border-gray-200 rounded-lg h-8 w-24 overflow-hidden">
+    <button
+      onClick={() => decreaseQty(item.id)}
+      className="w-full text-sm"
+    >
+      −
+    </button>
+    <span className="w-full text-center text-xs font-bold">
+      {item.quantity}
+    </span>
+    <button
+      onClick={() => increaseQty(item.id)}
+      className="w-full text-sm"
+    >
+      +
+    </button>
+  </div>
+
+  {/* Total */}
+  <div className="text-sm font-bold text-[#C0392B]">
+    ₹{(item.price * item.quantity).toFixed(2)}
+  </div>
+
+  {/* Delete */}
+  <button
+    onClick={() => removeFromCart(item.id)}
+    className="text-gray-400 p-1"
+  >
+    <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+  </button>
+
+</div>
                   </div>
                 ))
               ) : (
                 <div className="py-20 text-center flex flex-col items-center">
                   <div className="text-5xl mb-4">🛒</div>
                   <p className="text-gray-400">Oops! Your cart is empty.</p>
+                  <div className="text-center mt-12">
+                    <Link
+                      href="/user/product"
+                      className="inline-block border-2 border-primary_color text-primary_color font-semibold px-8 py-3 rounded-full hover:bg-primary_color hover:text-white transition duration-300"
+                    >
+                      Continue to Shipping →
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -288,28 +322,41 @@ const ShoppingCartPage = () => {
       {/* 3. Popup Modal */}
       {showPopup && (
         <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-md">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-10 text-center animate-fade-in-up">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-5 text-center animate-fade-in-up">
             <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
               ✓
             </div>
             <h3 className="text-2xl font-black text-gray-800 mb-2">
               Order Booked!
             </h3>
-            <p className="text-gray-600 mb-6 leading-relaxed mb-8">
+            <p className="text-gray-600 mb-6 leading-relaxed">
               Thank you for choosing{" "}
-              <span className="font-semibold text-orange-600">
-                Crunches Khakhra!
-              </span>{" "}
+              <Link
+                href="/"
+                className="shrink-0 flex items-center py-3 justify-center transform hover:scale-105 transition duration-300"
+              >
+                <Image
+                  src="/img/cruncheslogo.png"
+                  alt="cruncheslogo"
+                  width={140}
+                  // width={176}
+                  height={60}
+                  className="object-contain transition-all duration-300"
+                  priority
+                />
+              </Link>
               Your order request has been successfully booked. Our team will
               contact you shortly on WhatsApp to confirm the details. Have a
               crispy day!
             </p>
-            <button
-              onClick={() => setShowPopup(false)}
-              className="w-full bg-gray-800 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-colors"
-            >
-              Continue Shopping
-            </button>
+            <Link href="/user/product">
+              <button
+                onClick={() => setShowPopup(false)}
+                className="w-full bg-gray-800 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-colors"
+              >
+                Continue Shopping
+              </button>
+            </Link>
           </div>
         </div>
       )}

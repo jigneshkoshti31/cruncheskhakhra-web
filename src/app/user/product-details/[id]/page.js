@@ -5,6 +5,8 @@ import Image from "next/image";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import Link from "next/link";
+import { useCart } from "@/components/context/CartContext";
+import toast, { Toaster } from "react-hot-toast";
 
 // --- UPDATED MOCK DATA STRUCTURE (Objects with dimensions for better optimization) ---
 const productData = {
@@ -131,13 +133,41 @@ const ProductDetailspage = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState(productData.tabs[0]);
 
+  const { addToCart, cartItems } = useCart();
+  const isInCart = cartItems?.some((item) => item.id === productData.id);
+
   const handleQuantity = (type) => {
     if (type === "dec" && quantity > 1) setQuantity(quantity - 1);
     if (type === "inc") setQuantity(quantity + 1);
   };
 
+  
+  const handleAddToCart = () => {
+    // Ham naya object banayenge jisme current 'quantity' state shamil ho
+    const productToAdd = {
+      id: productData.id,
+      name: productData.title,
+      price: productData.price,
+      image: productData.images[0].src,
+      variant: "Regular",
+      quantity: quantity, // Ye wahi state hai jo aap increase/decrease kar rahe ho
+    };
+
+    if (isInCart) {
+      // Agar pehle se hai, toh hum updateQuantity use kar sakte hain ya addToCart ko hi update kar sakte hain
+      // Option A: Sirf quantity update kar do
+      updateQuantity(productData.id, quantity);
+      toast.success(`Cart updated! Quantity is now ${quantity}`, { icon: '🔄' });
+    } else {
+      // Option B: Naya item add karo select ki hui quantity ke saath
+      addToCart(productToAdd);
+      toast.success(`${quantity} ${productData.title} added to cart!`, { icon: '🛒' });
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-14 py-10 font-sans text-gray-800">
+      <Toaster position="top-center" reverseOrder={false} />
       {/* --- TOP SECTION: IMAGE & DETAILS --- */}
       <div className="flex flex-col items-start lg:flex-row gap-12">
         {/* Left: Image Gallery */}
@@ -242,11 +272,20 @@ const ProductDetailspage = () => {
             </div>
           </div>
           <div className="flex flex-col w-full sm:flex-row items-center gap-4">
-            <Link href="/user/cart">
-              <button className="bg-primary_color hover:bg-primary_dark w-full text-white px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl">
-                Add to Cart
+            {isInCart ? (
+              <Link href="/user/cart" className="w-full sm:w-auto">
+                <button className="bg-orange-500 hover:bg-orange-600 w-full text-white px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+                  Go to Cart
+                </button>
+              </Link>
+            ) : (
+              <button
+                onClick={handleAddToCart}
+                className="bg-primary_color hover:bg-primary_dark w-full sm:w-auto text-white px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl"
+              >
+                {isInCart ? "Update Quantity" : "Add to Cart"}
               </button>
-            </Link>
+            )}
             <button className="border-2 border-primary_color  text-yellow-600 hover:bg-primary_light px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl">
               Buy Now
             </button>

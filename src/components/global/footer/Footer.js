@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -73,29 +74,33 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link href="/" className="hover:text-primary_color transition">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/about-us"
+                  className="hover:text-primary_color transition"
+                >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/product"
+                  className="hover:text-primary_color transition"
+                >
                   Shop Products
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
-                  FAQs
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/contact-us"
+                  className="hover:text-primary_color transition"
+                >
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -106,29 +111,29 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link href="/user/product" className="hover:text-primary_color transition">
                   Plain Sada Khakhra
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link href="/user/product" className="hover:text-primary_color transition">
                   Methi Khakhra
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link href="/user/product" className="hover:text-primary_color transition">
                   Jeera Khakhra
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link href="/user/product" className="hover:text-primary_color transition">
                   Masala Khakhra
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary_color transition">
+                <Link href="/user/product" className="hover:text-primary_color transition">
                   Diet Khakhra
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -189,16 +194,16 @@ const Footer = () => {
                   <span>+91 76001 67002</span>
                 </div>
               </li>
-              <li className="flex items-center">
+              <a href="mailto:hello@cruncheskhakhra.com" className="flex items-center">
                 <i className="fa-solid fa-envelope mr-3 text-primary_color"></i>
-                <span>info.cruncheskhakhra@gmail.com</span>
-              </li>
+                <span>hello@cruncheskhakhra.com</span>
+              </a>
             </ul>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-          <p>&copy; 2026 Crunchy Khakhra. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Crunches Khakhra. All Rights Reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition">
               Privacy Policy
