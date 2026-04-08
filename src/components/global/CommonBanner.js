@@ -33,7 +33,7 @@ const CommonBannerPage = ({ title, image, decs }) => {
         className="object-cover h-full w-full"
       />
       <div className= "absolute w-full flex flex-col justify-center items-center  -translate-x-1/2 -translate-y-1/2 md:text-4xl top-1/2 left-1/2">
-        <h1 className="text-2xl font-bold tracking-wide text-center text-white uppercase" >{title}</h1>
+        <h1 className="text-3xl font-bold tracking-wide text-center text-white pb-4 uppercase" >{title}</h1>
         <p className="text-lg text-center text-white">{decs}</p>
       </div>
       {/* <h1 className="absolute text-xl font-bold text-center text-white uppercase -translate-x-1/2 -translate-y-1/2 md:text-4xl top-2/3 left-1/2">

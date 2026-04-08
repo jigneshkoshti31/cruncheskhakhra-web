@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
-
-
+import Link from "next/link";
 
 // --- UPDATED MOCK DATA STRUCTURE (Objects with dimensions for better optimization) ---
 const productData = {
@@ -27,22 +26,22 @@ const productData = {
   // Arrays are now standard objects with dimensions
   images: [
     {
-      src: "https://images.unsplash.com/photo-1626074353765-517a681e40be?q=80",
+      src: "/img/social-img/22.jpg",
       width: 800,
       height: 800,
     }, // Main
     {
-      src: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80",
+      src: "/img/social-img/14.jpg",
       width: 800,
       height: 800,
     }, // Thumb 1
     {
-      src: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?q=80",
+      src: "/img/social-img/26.jpg",
       width: 800,
       height: 800,
     }, // Thumb 2
     {
-      src: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80",
+      src: "/img/social-img/17.jpg",
       width: 800,
       height: 800,
     }, // Thumb 3
@@ -87,7 +86,7 @@ const productData = {
       original: 280.0,
       rating: 4.8,
       image: {
-        src: "https://images.unsplash.com/photo-1626074353765-517a681e40be?q=80",
+        src: "/img/social-img/22.jpg",
         width: 400,
         height: 400,
       },
@@ -99,7 +98,7 @@ const productData = {
       original: 250.0,
       rating: 4.5,
       image: {
-        src: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80",
+        src: "/img/social-img/19.jpg",
         width: 400,
         height: 400,
       },
@@ -111,7 +110,7 @@ const productData = {
       original: 280.0,
       rating: 4.9,
       image: {
-        src: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?q=80",
+        src: "/img/social-img/22.jpg",
         width: 400,
         height: 400,
       },
@@ -138,11 +137,11 @@ const ProductDetailspage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-sans text-gray-800">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-14 py-10 font-sans text-gray-800">
       {/* --- TOP SECTION: IMAGE & DETAILS --- */}
-      <div className="flex flex-col items-start lg:flex-row gap-10">
+      <div className="flex flex-col items-start lg:flex-row gap-12">
         {/* Left: Image Gallery */}
-        <div className="w-full lg:w-1/2 flex flex-col gap-4">
+        <div className="w-full lg:w-2/5 flex flex-col gap-4">
           {/* Main Optimized Image */}
           {/* relative position, aspect-ratio on parent are important when using next/image with full width */}
           <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-100 shadow-sm transition-opacity duration-300">
@@ -185,7 +184,7 @@ const ProductDetailspage = () => {
         </div>
 
         {/* Right: Product Info (No visual changes here, just JSX refinement) */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center">
+        <div className="w-full lg:w-3/5 flex flex-col justify-center">
           <h1 className="text-3xl font-bold mb-2">{productData.title}</h1>
           <div className="flex items-center gap-2 mb-4">
             <div className="flex">
@@ -225,7 +224,7 @@ const ProductDetailspage = () => {
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
             <p className="text-md font-bold">Quantity:</p>
-            
+
             <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden h-12 w-full sm:w-auto">
               <button
                 onClick={() => handleQuantity("dec")}
@@ -241,13 +240,14 @@ const ProductDetailspage = () => {
                 <FaPlus />
               </button>
             </div>
-            
           </div>
           <div className="flex flex-col w-full sm:flex-row items-center gap-4">
+            <Link href="/user/cart">
               <button className="bg-primary_color hover:bg-primary_dark w-full text-white px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl">
-              Add to Cart
-            </button>
-            <button className="border-2 border-primary_color w-full text-yellow-600 hover:bg-primary_light px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+                Add to Cart
+              </button>
+            </Link>
+            <button className="border-2 border-primary_color  text-yellow-600 hover:bg-primary_light px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-xl">
               Buy Now
             </button>
           </div>

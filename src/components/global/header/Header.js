@@ -20,7 +20,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/user/about-us" },
   { name: "Products", path: "/user/product", hasMegaMenu: true },
-  { name: "Shop", path: "" },
+  // { name: "Shop", path: "" },
   { name: "Contact Us", path: "/user/contact-us" },
 ];
 

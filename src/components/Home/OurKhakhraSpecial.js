@@ -35,8 +35,17 @@ const features = [
 
 const OurKhakhraSpecial = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="py-20 bg-[#F2F2F6CC] relative overflow-hidden">
+      <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 lg:w-[45%] opacity-30 pointer-events-none z-0 hidden sm:block">
+        <Image
+          src="/img/Background.png" /* <-- Yahan apni right wali background image ka path daal dein */
+          alt="Background Pattern"
+          fill
+          className="object-contain object-right"
+          quality={80}
+        />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
         
         {/* Image */}
         <div className="relative group">
