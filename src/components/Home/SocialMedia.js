@@ -110,7 +110,7 @@ const SocialMedia = () => {
         speed={40}
         pauseOnHover={true}
         gradient={false}
-        className="w-full"
+        className="w-full gap-4"
       >
         <div className="flex gap-4">
           {columns.map((col) => (
