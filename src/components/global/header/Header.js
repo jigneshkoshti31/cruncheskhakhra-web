@@ -21,7 +21,7 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/user/about-us" },
   { name: "Products", path: "/user/product", hasMegaMenu: true },
-  // { name: "Shop", path: "" },
+  { name: "FAQs", path: "" },
   { name: "Contact Us", path: "/user/contact-us" },
 ];
 
@@ -92,22 +92,24 @@ const Header = () => {
             <div className="flex gap-3 items-center">
               <a href="tel:+918511962244">
                 <i className="fa-solid fa-phone"></i>
+                <span>+91 85119 62244</span>
               </a>
-              <a href="https://wa.me/918511962244" target="_blank">
+              {/* <a href="https://wa.me/918511962244" target="_blank">
                 <i className="fa-brands fa-whatsapp text-green-500"></i>
-              </a>
-              <span>+91 85119 62244</span>
+              </a> */}
+              {/* <span>+91 85119 62244</span> */}
             </div>
-
+                {/* <span>-</span> */}
             {/* Number 2 */}
             <div className="flex gap-3 items-center">
               <a href="tel:+917600167002">
                 <i className="fa-solid fa-phone"></i>
+                <span>+91 76001 67002</span>
               </a>
-              <a href="https://wa.me/917600167002" target="_blank">
+              {/* <a href="https://wa.me/917600167002" target="_blank">
                 <i className="fa-brands fa-whatsapp text-green-500"></i>
-              </a>
-              <span>+91 76001 67002</span>
+              </a> */}
+              {/* <span>+91 76001 67002</span> */}
             </div>
             <a
               href="mailto:hello@cruncheskhakhra.com"
@@ -118,13 +120,13 @@ const Header = () => {
             </a>
           </div>
           <div className="items-center md:block hidden justify-center space-x-4 font-medium">
-            <Link href="/track" className="hover:text-white transition">
-              Track Order
+            <Link href="/" className="hover:text-white transition">
+              Store Location
             </Link>
-            <Link href="/store" className="hover:text-white transition">
-              Store Locator
+            <Link href="/" className="hover:text-white transition">
+              Order Tracking
             </Link>
-            <Link href="/faqs" className="hover:text-white transition">
+            <Link href="/" className="hover:text-white transition">
               FAQs
             </Link>
           </div>
@@ -261,10 +263,10 @@ const Header = () => {
                 </button>
               </div>
               <Link href="/user/cart">
-              <button className="shrink-0 mt-1 bg-orange-100 w-10 h-10 flex  items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
+              <button className="shrink-0 mt-1 bg-[#FEEFD0] w-10 h-10 flex  items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-yellow-500 text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-[#C00A27] text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
                  {cartCount}
                 </span>
                 )}
