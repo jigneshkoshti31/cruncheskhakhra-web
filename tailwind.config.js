@@ -28,6 +28,7 @@ module.exports = {
       },
       colors: {
         primary_color: "#F4B618",
+        primary_red: "#C00A27",
         primary_light: "#fde68a",
         primary_dark: "#b45309",
         "primary-hover": "#BF27D7",

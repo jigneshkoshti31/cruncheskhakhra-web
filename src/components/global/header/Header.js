@@ -86,7 +86,7 @@ const Header = () => {
       <div
         className={`bg-[#facc15] transition-all duration-300 overflow-hidden ${isScrolled ? "h-0 opacity-0" : "h-auto py-2 opacity-100"}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 w-full flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-black">
           <div className="flex flex-wrap justify-center md:justify-start items-center space-x-4 mb-2 md:mb-0">
             {/* Number 1 */}
             <div className="flex gap-3 items-center">

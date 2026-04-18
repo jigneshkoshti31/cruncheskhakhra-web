@@ -38,7 +38,7 @@ const Banner = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-left">
         {/* Tag */}
         <span className="bg-[rgba(244, 182, 24, 0.1)] border-2 border-primary_color text-white px-6 py-2 rounded-full text-sm font-medium tracking-wide inline-block mb-4">
-          🌾100% Natural & Healthy
+          🌾 100% Natural & Healthy
         </span>
 
         {/* Heading */}

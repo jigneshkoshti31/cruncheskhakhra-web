@@ -109,7 +109,7 @@ const PopularKhakhraSection = () => {
             className={`${playfair.className} text-3xl md:text-4xl font-bold text-gray-800 mb-2`}
           >
             Our Popular Khakhra{" "}
-            <span className="text-primary_color">Flavours</span>
+            <span className="text-primary_red">Flavours</span>
           </h2>
           <p className="text-gray-500">
             Taste the Tradition with our Bestselling Snacks

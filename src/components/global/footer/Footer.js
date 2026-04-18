@@ -6,22 +6,70 @@ const Footer = () => {
   return (
     <div>
       <div className="bg-green_color py-8 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
+        <div className="max-w-8xl mx-auto px-11 grid grid-cols-2 md:grid-cols-5 md:gap-0 gap-6 text-center text-white">
           <div className="flex flex-col items-center">
-            <i className="fa-solid fa-award text-3xl mb-3 text-primary_color"></i>
-            <h5 className="font-semibold text-sm">Premium Quality</h5>
+            {/* <i className="fa-solid fa-award text-3xl mb-3 text-primary_color"></i> */}
+            <Image
+              src="/img/footer-img/Truck.svg"
+              alt="cruncheslogo"
+              width={40}
+              height={40}
+              className="object-contain mb-4"
+            />
+            <h5 className=" text-md">Fast Delivery</h5>
+            <p className="font-light text-xs pt-1">Across India</p>
           </div>
           <div className="flex flex-col items-center">
-            <i className="fa-solid fa-leaf text-3xl mb-3 text-primary_color"></i>
-            <h5 className="font-semibold text-sm">100% Natural</h5>
+            {/* <i className="fa-solid fa-leaf text-3xl mb-3 text-primary_color"></i> */}
+            <Image
+              src="/img/footer-img/feature-icon-2.svg fill.svg"
+              alt="cruncheslogo"
+              width={40}
+              height={40}
+              className="object-contain mb-4"
+            />
+            <h5 className=" text-md">Safe Payment</h5>
+            <p className="font-light text-xs pt-1">
+              100% Safe & Trusted Payments
+            </p>
           </div>
           <div className="flex flex-col items-center">
-            <i className="fa-solid fa-truck-fast text-3xl mb-3 text-primary_color"></i>
-            <h5 className="font-semibold text-sm">Fast Delivery</h5>
+            {/* <i className="fa-solid fa-truck-fast text-3xl mb-3 text-primary_color"></i> */}
+            <Image
+              src="/img/footer-img/icon.svg"
+              alt="cruncheslogo"
+              width={40}
+              height={40}
+              className="object-contain mb-4"
+            />
+            <h5 className=" text-md">Special Offers</h5>
+            <p className="font-light text-xs pt-1">
+              Exclusive Deals & Combo Discounts
+            </p>
           </div>
           <div className="flex flex-col items-center">
-            <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i>
-            <h5 className="font-semibold text-sm">Secure Payment</h5>
+            {/* <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i> */}
+            <Image
+              src="/img/footer-img/feature-icon-4.svg.svg"
+              alt="cruncheslogo"
+              width={40}
+              height={40}
+              className="object-contain mb-4"
+            />
+            <h5 className=" text-md">Help Center</h5>
+            <p className="font-light text-xs pt-1">Friendly Customer Support</p>
+          </div>
+          <div className="flex flex-col items-center">
+            {/* <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i> */}
+            <Image
+              src="/img/footer-img/Package.svg"
+              alt="cruncheslogo"
+              width={40}
+              height={40}
+              className="object-contain mb-4"
+            />
+            <h5 className=" text-md capitalize">Quality Products</h5>
+            <p className="font-light text-xs pt-1">Freshly Roasted Khakhra</p>
           </div>
         </div>
       </div>
@@ -36,32 +84,31 @@ const Footer = () => {
               className="object-contain mb-6"
             />
             <p className="text-sm mb-6 leading-relaxed">
-              Bringing the authentic taste of Gujarat to your home with our
-              premium, hand-roasted, and healthy khakhras. A perfect companion
-              for your tea!
+              Fresh, healthy and crispy Gujarati khakhra delivered to your
+              doorstep. Made with love, tradition, and the finest ingredients.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                className="w-10 h-10 rounded-full bg-transparent text-xl border-2 border-amber-50 flex items-center justify-center hover:border-primary_color hover:text-primary_color transition"
               >
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                className="w-10 h-10 rounded-full bg-transparent text-xl border-2 border-amber-50 flex items-center justify-center hover:border-primary_color hover:text-primary_color transition"
               >
                 <i className="fa-brands fa-twitter"></i>
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                className="w-10 h-10 rounded-full bg-transparent text-xl border-2 border-amber-50 flex items-center justify-center hover:border-primary_color hover:text-primary_color transition"
               >
                 <i className="fa-brands fa-instagram"></i>
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                className="w-10 h-10 rounded-full bg-transparent text-xl border-2 border-amber-50 flex items-center justify-center hover:border-primary_color hover:text-primary_color transition"
               >
                 <i className="fa-brands fa-youtube"></i>
               </a>
@@ -111,27 +158,42 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/user/product" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/product"
+                  className="hover:text-primary_color transition"
+                >
                   Plain Sada Khakhra
                 </Link>
               </li>
               <li>
-                <Link href="/user/product" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/product"
+                  className="hover:text-primary_color transition"
+                >
                   Methi Khakhra
                 </Link>
               </li>
               <li>
-                <Link href="/user/product" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/product"
+                  className="hover:text-primary_color transition"
+                >
                   Jeera Khakhra
                 </Link>
               </li>
               <li>
-                <Link href="/user/product" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/product"
+                  className="hover:text-primary_color transition"
+                >
                   Masala Khakhra
                 </Link>
               </li>
               <li>
-                <Link href="/user/product" className="hover:text-primary_color transition">
+                <Link
+                  href="/user/product"
+                  className="hover:text-primary_color transition"
+                >
                   Diet Khakhra
                 </Link>
               </li>
@@ -144,7 +206,7 @@ const Footer = () => {
             </h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start">
-                <i className="fa-solid fa-location-dot mt-1 mr-3 text-primary_color"></i>
+                <i className="fa-solid fa-location-dot mt-1 mr-3 text-white"></i>
                 <span>
                   Shade No-2, Kothari Estate, Santej, Ahmedabad - 382722
                 </span>
@@ -175,35 +237,48 @@ const Footer = () => {
                 {/* Number 1 */}
                 <div className="flex gap-3 items-center">
                   <a href="tel:+918511962244">
-                    <i className="fa-solid fa-phone text-primary_color"></i>
+                    <i className="fa-solid fa-phone text-white"></i>
                   </a>
-                  <a href="https://wa.me/918511962244" target="_blank">
+                  {/* <a href="https://wa.me/918511962244" target="_blank">
                     <i className="fa-brands fa-whatsapp text-green-500"></i>
-                  </a>
+                  </a> */}
                   <span>+91 85119 62244</span>
                 </div>
 
                 {/* Number 2 */}
                 <div className="flex gap-3 items-center">
                   <a href="tel:+917600167002">
-                    <i className="fa-solid fa-phone text-primary_color"></i>
+                    <i className="fa-solid fa-phone text-white"></i>
                   </a>
-                  <a href="https://wa.me/917600167002" target="_blank">
+                  {/* <a href="https://wa.me/917600167002" target="_blank">
                     <i className="fa-brands fa-whatsapp text-green-500"></i>
-                  </a>
+                  </a> */}
                   <span>+91 76001 67002</span>
                 </div>
               </li>
-              <a href="mailto:hello@cruncheskhakhra.com" className="flex items-center">
-                <i className="fa-solid fa-envelope mr-3 text-primary_color"></i>
+              <a
+                href="mailto:hello@cruncheskhakhra.com"
+                className="flex items-center"
+              >
+                <i className="fa-solid fa-envelope mr-3 text-white"></i>
                 <span>hello@cruncheskhakhra.com</span>
+              </a>
+              <a
+                
+                className="flex items-center"
+              >
+                <i className="fa-regular fa-clock  mr-3 text-white"></i>
+                <span>9.00AM - 7.00PM</span>
               </a>
             </ul>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-          <p>&copy; {new Date().getFullYear()} Crunches Khakhra. All Rights Reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Crunches Khakhra. All Rights
+            Reserved.
+          </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition">
               Privacy Policy

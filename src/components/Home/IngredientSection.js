@@ -64,7 +64,7 @@ const FeatureItem = ({ item, reverse = false }) => {
 
       {/* Text */}
       <div>
-        <h4 className="font-bold text-xl text-red-600 group-hover:text-red-500 transition duration-300">
+        <h4 className="font-bold text-xl text-primary_red group-hover:text-red-500 transition duration-300">
           {item.title}
         </h4>
         <p className="text-sm text-gray-500 mt-2 leading-relaxed">
