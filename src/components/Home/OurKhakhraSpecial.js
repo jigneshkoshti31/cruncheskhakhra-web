@@ -58,7 +58,7 @@ const OurKhakhraSpecial = () => {
         </div>
 
         {/* Content */}
-        <div className="px-7">
+        <div className="md:px-7 px-2">
           <h2
             className={`${playfair.className} text-3xl md:text-3xl font-bold text-gray-800 mb-8`}
           >
@@ -66,7 +66,7 @@ const OurKhakhraSpecial = () => {
             <span className="text-primary_red">Special?</span>
           </h2>
 
-          <div className="space-y-6 px-6">
+          <div className="space-y-6 md:px-6 px-3">
             {features.map((item) => (
               <div key={item.id} className="flex items-start">
                 {/* Icon */}

@@ -12,19 +12,19 @@ const leftItems = [
     id: 1,
     title: "Fresh Fenugreek (Methi)",
     desc: "Fresh fenugreek leaves add a unique aroma and a healthy touch to our methi khakhra.",
-    icon: "fa-leaf",
+    image: "/img/Ingredients-img/Ingredients1.svg",
   },
   {
     id: 2,
     title: "Traditional Masala Blend",
     desc: "A special mix of handpicked spices that brings bold and authentic Gujarati flavor.",
-    icon: "fa-mortar-pestle",
+    image: "/img/Ingredients-img/Ingredients2.svg",
   },
   {
     id: 3,
     title: "Low Oil Roasting",
     desc: "Slow roasted with minimal oil to keep the khakhra light, crispy, and healthy.",
-    icon: "fa-fire-burner",
+    image: "/img/Ingredients-img/Ingredients3.svg",
   },
 ];
 
@@ -33,19 +33,19 @@ const rightItems = [
     id: 1,
     title: "Premium Wheat Flour",
     desc: "Made from selected wheat to give our khakhra its signature crispiness & wholesome texture.",
-    icon: "fa-wheat-awn",
+    image: "/img/Ingredients-img/Ingredients4.svg",
   },
   {
     id: 2,
     title: "Natural Spices",
     desc: "Authentic Indian spices blended perfectly to create rich aroma and flavorful taste in every bite.",
-    icon: "fa-seedling",
+    image: "/img/Ingredients-img/Ingredients5.svg",
   },
   {
     id: 3,
     title: "Rock Salt",
     desc: "Natural salt that enhances the taste while keeping the flavor balanced and delicious.",
-    icon: "fa-cubes",
+    image: "/img/Ingredients-img/Ingredients.svg",
   },
 ];
 
@@ -58,8 +58,15 @@ const FeatureItem = ({ item, reverse = false }) => {
       }`}
     >
       {/* Icon */}
-      <div className="bg-gray-50 w-14 h-14 flex items-center justify-center rounded-full text-gray-700 group-hover:scale-110 group-hover:bg-red-50 group-hover:text-red-600 transition duration-300 shrink-0 shadow-sm">
-        <i className={`fa-solid ${item.icon} text-2xl`}></i>
+      <div className="bg-gray-50 w-14 h-14 flex items-center justify-center rounded-full text-gray-700 group-hover:scale-110  group-hover:text-red-600 transition duration-300 shrink-0 shadow-sm">
+        {/* <i className={`fa-solid ${item.image} text-2xl`}></i> */}
+        <Image
+          src={item.image}
+          alt={item.title}
+          width={35}
+          height={35}
+          className="object-contain"
+        />
       </div>
 
       {/* Text */}

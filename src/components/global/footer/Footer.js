@@ -6,70 +6,83 @@ const Footer = () => {
   return (
     <div>
       <div className="bg-green_color py-8 border-b border-white/10">
-        <div className="max-w-8xl mx-auto px-11 grid grid-cols-2 md:grid-cols-5 md:gap-0 gap-6 text-center text-white">
-          <div className="flex flex-col items-center">
-            {/* <i className="fa-solid fa-award text-3xl mb-3 text-primary_color"></i> */}
-            <Image
-              src="/img/footer-img/Truck.svg"
-              alt="cruncheslogo"
-              width={40}
-              height={40}
-              className="object-contain mb-4"
-            />
-            <h5 className=" text-md">Fast Delivery</h5>
-            <p className="font-light text-xs pt-1">Across India</p>
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-5 md:gap-10 gap-6 text-center text-white">
+          <div>
+            <div className="flex flex-col items-center">
+              {/* <i className="fa-solid fa-award text-3xl mb-3 text-primary_color"></i> */}
+              <Image
+                src="/img/footer-img/Truck.svg"
+                alt="cruncheslogo"
+                width={40}
+                height={40}
+                className="object-contain mb-4"
+              />
+              <h5 className=" text-md">Fast Delivery</h5>
+              <p className="font-light text-xs pt-1">Across India</p>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            {/* <i className="fa-solid fa-leaf text-3xl mb-3 text-primary_color"></i> */}
-            <Image
-              src="/img/footer-img/feature-icon-2.svg fill.svg"
-              alt="cruncheslogo"
-              width={40}
-              height={40}
-              className="object-contain mb-4"
-            />
-            <h5 className=" text-md">Safe Payment</h5>
-            <p className="font-light text-xs pt-1">
-              100% Safe & Trusted Payments
-            </p>
+
+          <div>
+            <div className="flex flex-col items-center">
+              {/* <i className="fa-solid fa-leaf text-3xl mb-3 text-primary_color"></i> */}
+              <Image
+                src="/img/footer-img/feature-icon-2.svg fill.svg"
+                alt="cruncheslogo"
+                width={40}
+                height={40}
+                className="object-contain mb-4"
+              />
+              <h5 className=" text-md">Safe Payment</h5>
+              <p className="font-light text-xs pt-1">
+                100% Safe & Trusted Payments
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            {/* <i className="fa-solid fa-truck-fast text-3xl mb-3 text-primary_color"></i> */}
-            <Image
-              src="/img/footer-img/icon.svg"
-              alt="cruncheslogo"
-              width={40}
-              height={40}
-              className="object-contain mb-4"
-            />
-            <h5 className=" text-md">Special Offers</h5>
-            <p className="font-light text-xs pt-1">
-              Exclusive Deals & Combo Discounts
-            </p>
+          <div>
+            <div className="flex flex-col items-center">
+              {/* <i className="fa-solid fa-truck-fast text-3xl mb-3 text-primary_color"></i> */}
+              <Image
+                src="/img/footer-img/icon.svg"
+                alt="cruncheslogo"
+                width={40}
+                height={40}
+                className="object-contain mb-4"
+              />
+              <h5 className=" text-md">Special Offers</h5>
+              <p className="font-light text-xs pt-1">
+                Exclusive Deals & Combo Discounts
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            {/* <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i> */}
-            <Image
-              src="/img/footer-img/feature-icon-4.svg.svg"
-              alt="cruncheslogo"
-              width={40}
-              height={40}
-              className="object-contain mb-4"
-            />
-            <h5 className=" text-md">Help Center</h5>
-            <p className="font-light text-xs pt-1">Friendly Customer Support</p>
+          <div>
+            <div className="flex flex-col items-center">
+              {/* <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i> */}
+              <Image
+                src="/img/footer-img/feature-icon-4.svg.svg"
+                alt="cruncheslogo"
+                width={40}
+                height={40}
+                className="object-contain mb-4"
+              />
+              <h5 className=" text-md">Help Center</h5>
+              <p className="font-light text-xs pt-1">
+                Friendly Customer Support
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            {/* <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i> */}
-            <Image
-              src="/img/footer-img/Package.svg"
-              alt="cruncheslogo"
-              width={40}
-              height={40}
-              className="object-contain mb-4"
-            />
-            <h5 className=" text-md capitalize">Quality Products</h5>
-            <p className="font-light text-xs pt-1">Freshly Roasted Khakhra</p>
+          <div>
+            <div className="flex flex-col items-center">
+              {/* <i className="fa-solid fa-shield-halved text-3xl mb-3 text-primary_color"></i> */}
+              <Image
+                src="/img/footer-img/Package.svg"
+                alt="cruncheslogo"
+                width={40}
+                height={40}
+                className="object-contain mb-4"
+              />
+              <h5 className=" text-md capitalize">Quality Products</h5>
+              <p className="font-light text-xs pt-1">Freshly Roasted Khakhra</p>
+            </div>
           </div>
         </div>
       </div>
@@ -263,10 +276,7 @@ const Footer = () => {
                 <i className="fa-solid fa-envelope mr-3 text-white"></i>
                 <span>hello@cruncheskhakhra.com</span>
               </a>
-              <a
-                
-                className="flex items-center"
-              >
+              <a className="flex items-center">
                 <i className="fa-regular fa-clock  mr-3 text-white"></i>
                 <span>9.00AM - 7.00PM</span>
               </a>
