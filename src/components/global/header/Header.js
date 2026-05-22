@@ -266,10 +266,15 @@ const Header = () => {
               <button className="shrink-0 mt-1 bg-[#FEEFD0] w-10 h-10 flex  items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#C00A27] text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-primary_red text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
                  {cartCount}
                 </span>
                 )}
+              </button>
+              </Link>
+              <Link href="/user/login">
+              <button className="shrink-0 mt-1 bg-[#FEEFD0] w-20 h-10 flex  items-center justify-center rounded-md text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
+                Login
               </button>
               </Link>
               <button

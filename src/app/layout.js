@@ -1,8 +1,7 @@
 import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/global/header/Header";
-import Footer from "@/components/global/footer/Footer";
 import { CartProvider } from "@/components/context/CartContext";
+import ConditionalLayout from "@/components/global/ConditionalLayout";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -41,9 +40,11 @@ export default function RootLayout({ children }) {
         className={`${poppins.className} font-sans bg-gray-50 text-gray-800 antialiased selection:bg-primary_color selection:text-white`}
       >
         <CartProvider>
-          <Header />
+          <ConditionalLayout>
+
           {children}
-          <Footer />
+          </ConditionalLayout>
+          
         </CartProvider>
       </body>
     </html>
