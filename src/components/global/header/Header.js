@@ -13,8 +13,10 @@ import {
   X,
   ChevronDown,
   ArrowRight,
+  LogOut,
 } from "lucide-react";
 import { useCart } from "@/components/context/CartContext";
+import { useAuth } from "@/components/context/AuthContext";
 
 // --- DYNAMIC DATA ---
 const navLinks = [
@@ -63,8 +65,8 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false); // New state for scroll
 
-
   const { cartCount } = useCart();
+  const { user, logout } = useAuth();
 
   // Scroll detect karne ke liye logic
   useEffect(() => {
@@ -99,7 +101,7 @@ const Header = () => {
               </a> */}
               {/* <span>+91 85119 62244</span> */}
             </div>
-                {/* <span>-</span> */}
+            {/* <span>-</span> */}
             {/* Number 2 */}
             <div className="flex gap-3 items-center">
               <a href="tel:+917600167002">
@@ -252,31 +254,56 @@ const Header = () => {
 
             {/* Desktop Icons - Keep as is */}
             <div className="flex items-center space-x-4 md:space-x-6 text-gray-700">
-              <div className="hidden md:block">
-                <button className="shrink-0 mt-1 bg-[#F5F2FF] w-10 h-10 text-center flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 ">
-                  <Search className="w-5 h-5" />
-                </button>
-              </div>
-              <div className="hidden md:block">
-                <button className="shrink-0 mt-1 bg-[#FFF3EC] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 ">
-                  <User className="w-5 h-5" />
-                </button>
-              </div>
-              <Link href="/user/cart">
-              <button className="shrink-0 mt-1 bg-[#FEEFD0] w-10 h-10 flex  items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
-                <ShoppingCart className="w-5 h-5" />
-                {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-primary_red text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
-                 {cartCount}
-                </span>
-                )}
-              </button>
-              </Link>
-              <Link href="/user/login">
-              <button className="shrink-0 mt-1 bg-[#FEEFD0] w-20 h-10 flex  items-center justify-center rounded-md text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
-                Login
-              </button>
-              </Link>
+              {user ? (
+                // Agar user login hai to Icon show honge
+                <>
+                  <div className="hidden md:block">
+                    <button className="shrink-0 mt-1 bg-[#F5F2FF] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110">
+                      <Search className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Profile Icon with Hover Dropdown for Logout */}
+                  <div className="hidden md:block relative group">
+                    <button className="shrink-0 mt-1 bg-[#FFF3EC] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110">
+                      <User className="w-5 h-5" />
+                    </button>
+                    {/* Logout Dropdown menu */}
+                    <div className="absolute right-0 top-full pt-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+                      <div className="bg-white border border-gray-100 shadow-lg rounded-lg py-2 w-40">
+                        <div className="px-4 py-2 border-b border-gray-50 mb-1 text-xs text-gray-500 truncate">
+                          Hi, {user.name}
+                        </div>
+                        <button
+                          onClick={logout}
+                          className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition flex items-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" /> Logout
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link href="/user/cart">
+                    <button className="shrink-0 mt-1 bg-[#FEEFD0] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
+                      <ShoppingCart className="w-5 h-5" />
+                      {cartCount > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                          {cartCount}
+                        </span>
+                      )}
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                // Agar user login NAHI hai to sirf Login button show hoga
+                <Link href="/user/login">
+                  <button className="shrink-0 mt-1 bg-[#f2b822] w-24 h-10 flex items-center justify-center rounded-full text-gray-900 font-semibold hover:bg-[#e0aa1f] transition hover:scale-105 relative shadow-sm">
+                    Login
+                  </button>
+                </Link>
+              )}
+
               <button
                 className="lg:hidden text-gray-700 hover:text-yellow-500 transition"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

@@ -8,7 +8,7 @@ export default function ConditionalLayout({ children }) {
 
   // Agar aapka route kuch aur hai (e.g., '/auth/login'), toh isko update kar lena
   //   const isLoginPage = pathname === "/user/login";
-  const isLoginPage = ["/user/login", "/user/forgot-password"].includes(
+  const isLoginPage = ["/user/login", "/user/forgot-password", "/user/register"].includes(
     pathname,
   );
 

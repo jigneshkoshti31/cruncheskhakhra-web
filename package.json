@@ -12,6 +12,7 @@
     "@expo-google-fonts/plus-jakarta-sans": "^0.4.2",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@headlessui/react": "^2.2.9",
+    "axios": "^1.16.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
