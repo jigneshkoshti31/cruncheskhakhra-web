@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/context/AuthContext";
-import toast from "react-hot-toast";
-
+import { toast } from "sonner";
+// import toast from "react-hot-toast";
 const LoginForm = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");

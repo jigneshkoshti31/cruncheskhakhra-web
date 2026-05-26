@@ -103,7 +103,12 @@ const LoginSignup = () => {
           </div>
 
           {/* Conditionally Render the Forms */}
-          {activeTab === "login" ? <LoginForm /> : <SignupForm />}
+          {/* {activeTab === "login" ? <LoginForm /> : <SignupForm />} */}
+          {activeTab === "login" ? (
+            <LoginForm />
+          ) : (
+            <SignupForm switchToLogin={() => setActiveTab("login")} />
+          )}
         </div>
       </div>
 

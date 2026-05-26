@@ -32,7 +32,7 @@ export const verifyOtp = async (mobile, otp) => {
 };
 
 export const registerUser = async (userData) => {
-  console.log("🚀 API call shuru ho rahi hai, Data:", userData); // 1. Ye check karo console me aata hai?
+  console.log("🚀, Data:", userData); // 1. Ye check karo console me aata hai?
 
   try {
     const response = await axios.post(`${BASE_URL}/auth/register`, userData);

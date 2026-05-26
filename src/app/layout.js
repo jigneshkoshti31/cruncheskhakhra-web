@@ -3,6 +3,8 @@ import "./globals.css";
 import { CartProvider } from "@/components/context/CartContext";
 import ConditionalLayout from "@/components/global/ConditionalLayout";
 import { AuthProvider } from "@/components/context/AuthContext";
+// import { Toaster } from "react-hot-toast";
+import {Toaster} from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -40,6 +42,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.className} font-sans bg-gray-50 text-gray-800 antialiased selection:bg-primary_color selection:text-white`}
       >
+        {/* <Toaster position="top-center" reverseOrder={false} /> */}
+        <Toaster richColors position="top-center" />
         <AuthProvider>
           <CartProvider>
             <ConditionalLayout>{children}</ConditionalLayout>

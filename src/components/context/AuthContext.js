@@ -25,8 +25,11 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    toast.success("Logout successfully!")
     localStorage.removeItem("crunches_user");
+    toast.success("Logout successfully!")
+    setTimeout(() => {
+    window.location.reload();
+  }, 500);
   };
 
   return (
