@@ -264,7 +264,7 @@ const Header = () => {
                   </div>
 
                   {/* Profile Icon with Hover Dropdown for Logout */}
-                  <div className="hidden md:block relative group">
+                  <div className=" relative group">
                     <button className="shrink-0 mt-1 bg-[#FFF3EC] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110">
                       <User className="w-5 h-5" />
                     </button>
@@ -272,7 +272,7 @@ const Header = () => {
                     <div className="absolute right-0 top-full pt-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
                       <div className="bg-white border border-gray-100 shadow-lg rounded-lg py-2 w-40">
                         <div className="px-4 py-2 border-b border-gray-50 mb-1 text-xs text-gray-500 truncate">
-                          Hi, {user.name}
+                          Hi, {user?.name ? user.name : "User"}
                         </div>
                         <button
                           onClick={logout}

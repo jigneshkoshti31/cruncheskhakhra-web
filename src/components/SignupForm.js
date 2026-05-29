@@ -16,6 +16,8 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { useAuth } from "./context/AuthContext";
+
 
 const SignupForm = ({ switchToLogin }) => {
   const router = useRouter();
@@ -25,6 +27,8 @@ const SignupForm = ({ switchToLogin }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const { login } = useAuth();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,6 +40,9 @@ const SignupForm = ({ switchToLogin }) => {
 
   // Changed OTP state to a simple string for Shadcn InputOTP
   const [otp, setOtp] = useState("");
+
+  // Otp show screen
+  const [receivedOtp, setReceivedOtp] = useState("");
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -81,17 +88,73 @@ const SignupForm = ({ switchToLogin }) => {
   };
 
   // STEP 1: Send OTP
+  // const handleSendCode = async (e) => {
+  //   e.preventDefault();
+  //   if (!validateStep1()) return;
+
+  //   setLoading(true);
+  //   try {
+  //     await sendOtp(formData.mobile);
+  //     toast.success("OTP sent successfully to your mobile number! 📱");
+  //     setStep(2);
+  //   } catch (err) {
+  //     const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || err.message || "Failed to send OTP.";
+  //     toast.error(errorMsg);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // ================= STEP 2: Verify OTP =================
+  // const handleVerifyCode = async (e) => {
+  //   e.preventDefault();
+
+  //   if (otp.length < 6) {
+  //     setErrors({ otp: "Please enter the complete 6-digit OTP" });
+  //     return;
+  //   }
+
+  //   setLoading(true);
+  //   try {
+  //     await verifyOtp(formData.mobile, otp);
+  //     toast.success("OTP Verified Successfully! ✅");
+  //     setStep(3);
+  //   } catch (err) {
+  //     setErrors({ otp: "Invalid OTP" });
+  //     const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || "Oops! Incorrect OTP. Please try again.";
+  //     toast.error(errorMsg);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // otp show screen function
+  // STEP 1: Send OTP
   const handleSendCode = async (e) => {
     e.preventDefault();
     if (!validateStep1()) return;
 
     setLoading(true);
     try {
-      await sendOtp(formData.mobile);
+      // response ko ek variable me liya
+      const response = await sendOtp(formData.mobile);
+
+      // NOTE: Agar aapka OTP response.data.otp me hai ya directly response.otp me,
+      // uske mutabik niche wali line ko adjust karein.
+      const incomingOtp = response?.data?.otp || response?.otp;
+
+      if (incomingOtp) {
+        setReceivedOtp(incomingOtp); // OTP state me save kar liya
+      }
+
       toast.success("OTP sent successfully to your mobile number! 📱");
       setStep(2);
     } catch (err) {
-      const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || err.message || "Failed to send OTP.";
+      const errorMsg =
+        err?.response?.data?.msg ||
+        err?.response?.data?.message ||
+        err.message ||
+        "Failed to send OTP.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -114,7 +177,10 @@ const SignupForm = ({ switchToLogin }) => {
       setStep(3);
     } catch (err) {
       setErrors({ otp: "Invalid OTP" });
-      const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || "Oops! Incorrect OTP. Please try again.";
+      const errorMsg =
+        err?.response?.data?.msg ||
+        err?.response?.data?.message ||
+        "Oops! Incorrect OTP. Please try again.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -167,19 +233,27 @@ const SignupForm = ({ switchToLogin }) => {
       const response = await registerUser(payload);
 
       // Save details to Local Storage
-      localStorage.setItem(
-        "userDetails",
-        JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          mobile: cleanMobile,
-        }),
-      );
+      // localStorage.setItem(
+      //   "userDetails",
+      //   JSON.stringify({
+      //     name: formData.name,
+      //     email: formData.email,
+      //     mobile: cleanMobile,
+      //   }),
+      // );
+      const userPayload = {
+        name: formData.name,
+        email: formData.email,
+        mobile: cleanMobile,
+        ...response?.data // Agar backend se token ya id aati hai to vo bhi save ho jaye
+      };
+
+      login(userPayload);
 
       toast.success("Logged in successfully! 🎉");
       setStep(4);
     } catch (err) {
-      const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || "Registration failed.";
+     const errorMsg = err?.response?.data?.msg || "Registration failed.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -250,25 +324,29 @@ const SignupForm = ({ switchToLogin }) => {
                   : ""
               }`}
             >
-              <PhoneInput
-                country={"in"}
-                enableSearch={true}
-                value={formData.mobile}
-                onChange={handlePhoneChange}
-                inputStyle={{
-                  width: "100%",
-                  height: "46px",
-                  fontSize: "14px",
-                  borderColor: errors.mobile ? "transparent" : "#e5e7eb",
-                  borderRadius: "0.5rem",
-                }}
-                buttonStyle={{
-                  borderColor: errors.mobile ? "transparent" : "#e5e7eb",
-                  borderTopLeftRadius: "0.5rem",
-                  borderBottomLeftRadius: "0.5rem",
-                  backgroundColor: "#f9fafb",
-                }}
-              />
+              <div
+                className={`flex items-center border rounded-lg px-3 bg-white focus-within:ring-2 focus-within:ring-[#f2b822]/20 focus-within:border-[#f2b822] transition-all ${errors.mobile ? "border-red-500" : "border-gray-200"}`}
+              >
+                <div className="flex items-center gap-1 pr-2 border-r border-gray-200 text-gray-700 text-[14px] cursor-pointer select-none">
+                  <span className="text-[16px]">🇮🇳</span>
+                  <span className="font-medium">+91</span>
+                </div>
+                <input
+                  type="tel"
+                  placeholder="Enter Your Phone Number"
+                  value={formData.mobile}
+                  maxLength={10}
+                  onChange={(e) => {
+                    const cleaned = e.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, 10);
+                    // State me formData ke andar mobile number ko save kiya ✨
+                    setFormData({ ...formData, mobile: cleaned });
+                    setErrors({ ...errors, mobile: "" });
+                  }}
+                  className="w-full pl-3 py-3 text-[14px] text-gray-800 placeholder-gray-300 bg-transparent outline-none"
+                />
+              </div>
             </div>
             {errors.mobile && (
               <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
@@ -330,6 +408,17 @@ const SignupForm = ({ switchToLogin }) => {
           <p className="text-[13px] text-gray-500 text-center mb-6">
             We sent a verification code to **{formData.mobile.slice(-4)}**
           </p>
+
+          {receivedOtp && (
+            <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg text-center">
+              <p className="text-xs text-amber-700 font-medium uppercase tracking-wider mb-1">
+                Your OTP Code (Testing)
+              </p>
+              <p className="text-2xl font-bold text-amber-900 tracking-widest">
+                {receivedOtp}
+              </p>
+            </div>
+          )}
 
           {/* Shadcn OTP Input */}
           <div className="flex flex-col items-center justify-center mb-6">
