@@ -1,16 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Eye, EyeOff, CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { sendOtp, verifyOtp, registerUser } from "@/services/api";
+import { loginSignup, verifyOtp } from "@/services/api"; // Updated imports
 import { toast } from "sonner";
-// import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-// React Phone Input
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-// Shadcn OTP Input (Adjust path if needed)
 import {
   InputOTP,
   InputOTPGroup,
@@ -18,59 +14,28 @@ import {
 } from "@/components/ui/input-otp";
 import { useAuth } from "./context/AuthContext";
 
-
 const SignupForm = ({ switchToLogin }) => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [errors, setErrors] = useState({});
 
   const { login } = useAuth();
 
+  // Sirf mobile number chahiye ab
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
     mobile: "",
-    password: "",
-    confirmPassword: "",
   });
 
-  // Changed OTP state to a simple string for Shadcn InputOTP
   const [otp, setOtp] = useState("");
+  const [receivedOtp, setReceivedOtp] = useState(""); // Testing ke liye
 
-  // Otp show screen
-  const [receivedOtp, setReceivedOtp] = useState("");
-
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    // Clear error when user starts typing
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const handlePhoneChange = (value) => {
-    setFormData({ ...formData, mobile: value });
-    setErrors({ ...errors, mobile: "" });
-  };
-
-  // ================= STEP 1: Details Validation =================
+  // ================= STEP 1: Validation =================
   const validateStep1 = () => {
     let tempErrors = {};
     let isValid = true;
 
-    if (!formData.name.trim()) {
-      tempErrors.name = "Full Name is required";
-      isValid = false;
-    }
-    if (!formData.email.trim()) {
-      tempErrors.email = "Email Address is required";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      tempErrors.email = "Please enter a valid email address";
-      isValid = false;
-    }
     if (!formData.mobile) {
       tempErrors.mobile = "Mobile number is required";
       isValid = false;
@@ -87,74 +52,41 @@ const SignupForm = ({ switchToLogin }) => {
     return isValid;
   };
 
-  // STEP 1: Send OTP
-  // const handleSendCode = async (e) => {
-  //   e.preventDefault();
-  //   if (!validateStep1()) return;
-
-  //   setLoading(true);
-  //   try {
-  //     await sendOtp(formData.mobile);
-  //     toast.success("OTP sent successfully to your mobile number! 📱");
-  //     setStep(2);
-  //   } catch (err) {
-  //     const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || err.message || "Failed to send OTP.";
-  //     toast.error(errorMsg);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // ================= STEP 2: Verify OTP =================
-  // const handleVerifyCode = async (e) => {
-  //   e.preventDefault();
-
-  //   if (otp.length < 6) {
-  //     setErrors({ otp: "Please enter the complete 6-digit OTP" });
-  //     return;
-  //   }
-
-  //   setLoading(true);
-  //   try {
-  //     await verifyOtp(formData.mobile, otp);
-  //     toast.success("OTP Verified Successfully! ✅");
-  //     setStep(3);
-  //   } catch (err) {
-  //     setErrors({ otp: "Invalid OTP" });
-  //     const errorMsg = err?.response?.data?.msg || err?.response?.data?.message || "Oops! Incorrect OTP. Please try again.";
-  //     toast.error(errorMsg);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // otp show screen function
-  // STEP 1: Send OTP
+  // ================= STEP 1: Send OTP (Signup) =================
   const handleSendCode = async (e) => {
     e.preventDefault();
     if (!validateStep1()) return;
 
     setLoading(true);
     try {
-      // response ko ek variable me liya
-      const response = await sendOtp(formData.mobile);
+      const cleanMobile = formData.mobile.slice(-10);
+      const response = await loginSignup(cleanMobile);
 
-      // NOTE: Agar aapka OTP response.data.otp me hai ya directly response.otp me,
-      // uske mutabik niche wali line ko adjust karein.
-      const incomingOtp = response?.data?.otp || response?.otp;
+      const isNewUser = response?.data?.isNewUser;
+      const incomingOtp = response?.data?.otp;
 
+      // 👇 Yahan naya logic add kiya hai 👇
+      if (isNewUser === false) {
+        // Agar user pehle se registered hai, toh error dikhao aur rok do
+        toast.error("Number already registered please Login");
+
+        // Agar aap chahte ho ki error aane ke baad automatically Login tab open ho jaye, 
+        // toh niche wali line ka use kar sakte ho (optional):
+        if (switchToLogin) switchToLogin();
+
+        setLoading(false);
+        return; // Process yahi rok do, OTP screen (Step 2) par mat jao
+      }
+
+      // Agar naya user hai tabhi aage badho
       if (incomingOtp) {
-        setReceivedOtp(incomingOtp); // OTP state me save kar liya
+        setReceivedOtp(incomingOtp); // Screen par dikhane ke liye (testing mode)
       }
 
       toast.success("OTP sent successfully to your mobile number! 📱");
-      setStep(2);
+      setStep(2); // Direct OTP screen par jao
     } catch (err) {
-      const errorMsg =
-        err?.response?.data?.msg ||
-        err?.response?.data?.message ||
-        err.message ||
-        "Failed to send OTP.";
+      const errorMsg = err.message || "Failed to send OTP.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -172,88 +104,23 @@ const SignupForm = ({ switchToLogin }) => {
 
     setLoading(true);
     try {
-      await verifyOtp(formData.mobile, otp);
-      toast.success("OTP Verified Successfully! ✅");
-      setStep(3);
-    } catch (err) {
-      setErrors({ otp: "Invalid OTP" });
-      const errorMsg =
-        err?.response?.data?.msg ||
-        err?.response?.data?.message ||
-        "Oops! Incorrect OTP. Please try again.";
-      toast.error(errorMsg);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ================= STEP 3: Register Details Validation =================
-  const validateStep3 = () => {
-    let tempErrors = {};
-    let isValid = true;
-
-    if (!formData.password) {
-      tempErrors.password = "Password is required";
-      isValid = false;
-    } else if (formData.password.length < 6) {
-      tempErrors.password = "Password must be at least 6 characters";
-      isValid = false;
-    }
-
-    if (!formData.confirmPassword) {
-      tempErrors.confirmPassword = "Confirm Password is required";
-      isValid = false;
-    } else if (formData.password !== formData.confirmPassword) {
-      tempErrors.confirmPassword = "Passwords do not match";
-      isValid = false;
-    }
-
-    setErrors(tempErrors);
-    return isValid;
-  };
-
-  // STEP 3: Register
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    if (!validateStep3()) return;
-
-    setLoading(true);
-    try {
       const cleanMobile = formData.mobile.slice(-10);
-      const payload = {
-        mobile: cleanMobile,
-        password: formData.password,
-        name: formData.name,
-        email: formData.email,
-        deviceType: "Web",
-        deviceInfo: "Browser",
-        deviceIp: "127.0.0.1",
-      };
+      const response = await verifyOtp(cleanMobile, otp);
 
-      const response = await registerUser(payload);
-
-      // Save details to Local Storage
-      // localStorage.setItem(
-      //   "userDetails",
-      //   JSON.stringify({
-      //     name: formData.name,
-      //     email: formData.email,
-      //     mobile: cleanMobile,
-      //   }),
-      // );
+      // Token aur user data context/storage me save karo
       const userPayload = {
-        name: formData.name,
-        email: formData.email,
         mobile: cleanMobile,
-        ...response?.data // Agar backend se token ya id aati hai to vo bhi save ho jaye
+        ...response?.data?.user,
+        token: response?.data?.token,
       };
 
       login(userPayload);
 
       toast.success("Logged in successfully! 🎉");
-      setStep(4);
+      setStep(3); // Success Screen
     } catch (err) {
-     const errorMsg = err?.response?.data?.msg || "Registration failed.";
+      setErrors({ otp: "Invalid OTP" });
+      const errorMsg = err.message || "Oops! Incorrect OTP. Please try again.";
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -262,70 +129,26 @@ const SignupForm = ({ switchToLogin }) => {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      {/* STEP 1: Details */}
+      {/* STEP 1: Mobile Number */}
       {step === 1 && (
         <form
           onSubmit={handleSendCode}
           className="space-y-4 animate-[fadeIn_0.3s_ease-out]"
         >
-          {/* Name Field */}
-          <div>
-            <label className="block text-[13px] font-medium text-gray-700 mb-1.5">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="John Doe"
-              value={formData.name}
-              onChange={handleInputChange}
-              className={`w-full px-4 py-3 text-[14px] text-gray-900 border rounded-lg outline-none transition-all ${
-                errors.name
-                  ? "border-red-500 focus:ring-red-500/20"
-                  : "border-gray-200 focus:border-[#f2b822] focus:ring-[#f2b822]/20"
-              }`}
-            />
-            {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-            )}
-          </div>
-
-          {/* Email Field */}
-          <div>
-            <label className="block text-[13px] font-medium text-gray-700 mb-1.5">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="john@example.com"
-              value={formData.email}
-              onChange={handleInputChange}
-              className={`w-full px-4 py-3 text-[14px] text-gray-900 border rounded-lg outline-none transition-all ${
-                errors.email
-                  ? "border-red-500 focus:ring-red-500/20"
-                  : "border-gray-200 focus:border-[#f2b822] focus:ring-[#f2b822]/20"
-              }`}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-            )}
-          </div>
-
-          {/* Mobile Field (React Phone Input 2) */}
+          {/* Mobile Field */}
           <div className="mb-2">
             <label className="block text-[13px] font-medium text-gray-700 mb-1.5">
               Mobile Number
             </label>
             <div
-              className={`rounded-lg transition-all duration-200 ${
-                errors.mobile
-                  ? "border border-red-500 shadow-[0_0_0_1px_rgba(239,68,68,0.2)]"
-                  : ""
-              }`}
+              className={`rounded-lg transition-all duration-200 ${errors.mobile
+                ? "border border-red-500 shadow-[0_0_0_1px_rgba(239,68,68,0.2)]"
+                : ""
+                }`}
             >
               <div
-                className={`flex items-center border rounded-lg px-3 bg-white focus-within:ring-2 focus-within:ring-[#f2b822]/20 focus-within:border-[#f2b822] transition-all ${errors.mobile ? "border-red-500" : "border-gray-200"}`}
+                className={`flex items-center border rounded-lg px-3 bg-white focus-within:ring-2 focus-within:ring-[#f2b822]/20 focus-within:border-[#f2b822] transition-all ${errors.mobile ? "border-red-500" : "border-gray-200"
+                  }`}
               >
                 <div className="flex items-center gap-1 pr-2 border-r border-gray-200 text-gray-700 text-[14px] cursor-pointer select-none">
                   <span className="text-[16px]">🇮🇳</span>
@@ -340,7 +163,6 @@ const SignupForm = ({ switchToLogin }) => {
                     const cleaned = e.target.value
                       .replace(/\D/g, "")
                       .slice(0, 10);
-                    // State me formData ke andar mobile number ko save kiya ✨
                     setFormData({ ...formData, mobile: cleaned });
                     setErrors({ ...errors, mobile: "" });
                   }}
@@ -394,7 +216,7 @@ const SignupForm = ({ switchToLogin }) => {
             className="w-full flex items-center justify-center gap-2 bg-[#f2b822] hover:bg-[#e0aa1f] text-gray-900 font-semibold text-[14px] py-3 mt-4 rounded-full transition-all duration-200 shadow-sm active:scale-[0.98] disabled:opacity-70"
           >
             {loading && <Loader2 size={16} className="animate-spin" />}
-            {loading ? "Sending..." : "Send OTP"}
+            {loading ? "Sending OTP..." : "Get OTP"}
           </button>
         </form>
       )}
@@ -435,11 +257,10 @@ const SignupForm = ({ switchToLogin }) => {
                   <InputOTPSlot
                     key={index}
                     index={index}
-                    className={`w-12 h-12 text-xl font-semibold border rounded-md transition-all ${
-                      errors.otp
-                        ? "border-red-500 ring-1 ring-red-500/20"
-                        : "border-gray-300 focus:border-[#f2b822]"
-                    }`}
+                    className={`w-12 h-12 text-xl font-semibold border rounded-md transition-all ${errors.otp
+                      ? "border-red-500 ring-1 ring-red-500/20"
+                      : "border-gray-300 focus:border-[#f2b822]"
+                      }`}
                   />
                 ))}
               </InputOTPGroup>
@@ -460,106 +281,21 @@ const SignupForm = ({ switchToLogin }) => {
         </form>
       )}
 
-      {/* STEP 3: Passwords */}
+      {/* STEP 3: Success */}
       {step === 3 && (
-        <form
-          onSubmit={handleRegister}
-          className="space-y-4 animate-[fadeIn_0.3s_ease-out]"
-        >
-          {/* Password */}
-          <div>
-            <label className="block text-[13px] font-medium text-gray-700 mb-1.5">
-              Password
-            </label>
-            <div
-              className={`flex items-center border rounded-lg overflow-hidden bg-white transition-all ${
-                errors.password
-                  ? "border-red-500 ring-1 ring-red-500/20"
-                  : "border-gray-200 focus-within:border-[#f2b822] focus-within:ring-1 focus-within:ring-[#f2b822]/20"
-              }`}
-            >
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Create a strong password"
-                value={formData.password}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 text-[14px] text-gray-900 outline-none bg-transparent"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="px-4 text-gray-400"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-            )}
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <label className="block text-[13px] font-medium text-gray-700 mb-1.5">
-              Confirm Password
-            </label>
-            <div
-              className={`flex items-center border rounded-lg overflow-hidden bg-white transition-all ${
-                errors.confirmPassword
-                  ? "border-red-500 ring-1 ring-red-500/20"
-                  : "border-gray-200 focus-within:border-[#f2b822] focus-within:ring-1 focus-within:ring-[#f2b822]/20"
-              }`}
-            >
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                placeholder="Re-enter password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 text-[14px] text-gray-900 outline-none bg-transparent"
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="px-4 text-gray-400"
-              >
-                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.confirmPassword}
-              </p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-[#f2b822] hover:bg-[#e0aa1f] text-gray-900 font-semibold text-[14px] py-3 mt-4 rounded-full transition-all duration-200 shadow-sm active:scale-[0.98] disabled:opacity-70"
-          >
-            {loading && <Loader2 size={16} className="animate-spin" />}
-            {loading ? "Processing..." : "Complete Registration"}
-          </button>
-        </form>
-      )}
-
-      {/* STEP 4: Success */}
-      {step === 4 && (
         <div className="animate-[scaleIn_0.4s_ease-out] flex flex-col items-center justify-center py-4">
           <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-4">
             <CheckCircle2 size={32} className="text-green-500" />
           </div>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Success!</h2>
           <p className="text-sm text-gray-500 mb-4 text-center">
-            Your account has been created successfully.
+            You are successfully logged in.
           </p>
           <button
-            onClick={switchToLogin}
+            onClick={() => router.push("/")} // Yahan aap apna dashboard path set kar sakte ho
             className="w-full bg-[#f2b822] hover:bg-[#e0aa1f] text-gray-900 font-semibold text-[14px] py-3 mt-4 rounded-full transition-all duration-200 shadow-sm"
           >
-            Go to Login
+            Go to Dashboard
           </button>
         </div>
       )}
