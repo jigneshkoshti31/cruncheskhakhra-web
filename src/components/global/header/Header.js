@@ -2,28 +2,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState, useEffect } from "react"; // Added useEffect
+import React, { useState, useEffect } from "react";
 import {
   Phone,
   Mail,
   Search,
-  User,
   ShoppingCart,
   Menu,
   X,
   ChevronDown,
   ArrowRight,
-  LogOut,
 } from "lucide-react";
 import { useCart } from "@/components/context/CartContext";
-import { useAuth } from "@/components/context/AuthContext";
+// AuthContext remove kar diya gaya hai
 
 // --- DYNAMIC DATA ---
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/user/about-us" },
   { name: "Products", path: "/user/product", hasMegaMenu: true },
-  { name: "FAQs", path: "" },
   { name: "Contact Us", path: "/user/contact-us" },
 ];
 
@@ -63,10 +60,10 @@ const megaMenuProducts = [
 const Header = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); // New state for scroll
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { cartCount } = useCart();
-  const { user, logout } = useAuth();
+  // User login/logout logic completely removed
 
   // Scroll detect karne ke liye logic
   useEffect(() => {
@@ -86,7 +83,9 @@ const Header = () => {
     <header className="w-full relative z-100">
       {/* Top Bar - Scroll hone par hide hoga smoothly */}
       <div
-        className={`bg-[#facc15] transition-all duration-300 overflow-hidden ${isScrolled ? "h-0 opacity-0" : "h-auto py-2 opacity-100"}`}
+        className={`bg-[#facc15] transition-all duration-300 overflow-hidden ${
+          isScrolled ? "h-0 opacity-0" : "h-auto py-2 opacity-100"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 w-full flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-black">
           <div className="flex flex-wrap justify-center md:justify-start items-center space-x-4 mb-2 md:mb-0">
@@ -96,22 +95,13 @@ const Header = () => {
                 <i className="fa-solid fa-phone"></i>
                 <span>+91 85119 62244</span>
               </a>
-              {/* <a href="https://wa.me/918511962244" target="_blank">
-                <i className="fa-brands fa-whatsapp text-green-500"></i>
-              </a> */}
-              {/* <span>+91 85119 62244</span> */}
             </div>
-            {/* <span>-</span> */}
             {/* Number 2 */}
             <div className="flex gap-3 items-center">
               <a href="tel:+917600167002">
                 <i className="fa-solid fa-phone"></i>
                 <span>+91 76001 67002</span>
               </a>
-              {/* <a href="https://wa.me/917600167002" target="_blank">
-                <i className="fa-brands fa-whatsapp text-green-500"></i>
-              </a> */}
-              {/* <span>+91 76001 67002</span> */}
             </div>
             <a
               href="mailto:hello@cruncheskhakhra.com"
@@ -121,7 +111,7 @@ const Header = () => {
               hello@cruncheskhakhra.com
             </a>
           </div>
-          <div className="items-center md:block hidden justify-center space-x-4 font-medium">
+          {/* <div className="items-center md:block hidden justify-center space-x-4 font-medium">
             <Link href="/" className="hover:text-white transition">
               Store Location
             </Link>
@@ -131,7 +121,7 @@ const Header = () => {
             <Link href="/" className="hover:text-white transition">
               FAQs
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -147,7 +137,9 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div
-            className={`flex justify-between items-center transition-all duration-300 ${isScrolled ? "h-20" : "h-20"}`}
+            className={`flex justify-between items-center transition-all duration-300 ${
+              isScrolled ? "h-20" : "h-20"
+            }`}
           >
             {/* Logo */}
             <Link
@@ -158,7 +150,6 @@ const Header = () => {
                 src="/img/cruncheslogo.png"
                 alt="cruncheslogo"
                 width={isScrolled ? 140 : 176}
-                // width={176}
                 height={60}
                 className="object-contain transition-all duration-300"
                 priority
@@ -177,7 +168,11 @@ const Header = () => {
                     <Link
                       href={link.path}
                       className={`flex items-center text-sm font-semibold tracking-wide transition-colors duration-200 h-full
-                        ${isActive ? "text-yellow-500" : "text-gray-700 hover:text-yellow-500"}
+                        ${
+                          isActive
+                            ? "text-yellow-500"
+                            : "text-gray-700 hover:text-yellow-500"
+                        }
                       `}
                     >
                       {link.name}
@@ -199,7 +194,6 @@ const Header = () => {
                                 <ul className="space-y-3">
                                   {group.items.map((item, itemIdx) => (
                                     <li key={itemIdx}>
-                                      {/* <Link href={`/user/product/${item.toLowerCase().replace(/ /g, "-")}`} className="text-gray-500 hover:text-yellow-500 hover:font-semibold text-sm transition-colors flex items-center gap-1 group/item"> */}
                                       <Link
                                         href="/user/product"
                                         className="text-gray-500 hover:text-yellow-500 hover:font-semibold text-sm transition-colors flex items-center gap-1 group/item"
@@ -226,7 +220,6 @@ const Header = () => {
                                 priority
                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                               />
-                              {/* Dark Overlay on Hover for premium look (optional) */}
                               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/card:opacity-100 transition-opacity" />
                             </div>
 
@@ -240,7 +233,6 @@ const Header = () => {
                                 priority
                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                               />
-                              {/* Dark Overlay on Hover for premium look (optional) */}
                               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/card:opacity-100 transition-opacity" />
                             </div>
                           </div>
@@ -252,57 +244,36 @@ const Header = () => {
               })}
             </div>
 
-            {/* Desktop Icons - Keep as is */}
+            {/* Desktop Icons - Static View with Call Now */}
             <div className="flex items-center space-x-4 md:space-x-6 text-gray-700">
-              {user ? (
-                // Agar user login hai to Icon show honge
-                <>
-                  <div className="hidden md:block">
-                    <button className="shrink-0 mt-1 bg-[#F5F2FF] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110">
-                      <Search className="w-5 h-5" />
-                    </button>
-                  </div>
+              {/* <div className="hidden md:block">
+                <button className="shrink-0 mt-1 bg-[#F5F2FF] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110">
+                  <Search className="w-5 h-5" />
+                </button>
+              </div> */}
 
-                  {/* Profile Icon with Hover Dropdown for Logout */}
-                  <div className=" relative group">
-                    <button className="shrink-0 mt-1 bg-[#FFF3EC] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110">
-                      <User className="w-5 h-5" />
-                    </button>
-                    {/* Logout Dropdown menu */}
-                    <div className="absolute right-0 top-full pt-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
-                      <div className="bg-white border border-gray-100 shadow-lg rounded-lg py-2 w-40">
-                        <div className="px-4 py-2 border-b border-gray-50 mb-1 text-xs text-gray-500 truncate">
-                          Hi, {user?.name ? user.name : "User"}
-                        </div>
-                        <button
-                          onClick={logout}
-                          className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition flex items-center gap-2"
-                        >
-                          <LogOut className="w-4 h-4" /> Logout
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+              {/* <Link href="/user/cart">
+                <button className="shrink-0 mt-1 bg-[#FEEFD0] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
+                  <ShoppingCart className="w-5 h-5" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartCount}
+                    </span>
+                  )}
+                </button>
+              </Link> */}
 
-                  <Link href="/user/cart">
-                    <button className="shrink-0 mt-1 bg-[#FEEFD0] w-10 h-10 flex items-center justify-center rounded-full text-primary_color hover:bg-primary_color hover:text-white transition hover:scale-110 relative">
-                      <ShoppingCart className="w-5 h-5" />
-                      {cartCount > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[12px] font-semibold rounded-full h-5 w-5 flex items-center justify-center">
-                          {cartCount}
-                        </span>
-                      )}
-                    </button>
-                  </Link>
-                </>
-              ) : (
-                // Agar user login NAHI hai to sirf Login button show hoga
-                <Link href="/user/login">
-                  <button className="shrink-0 mt-1 bg-[#f2b822] w-24 h-10 flex items-center justify-center rounded-full text-gray-900 font-semibold hover:bg-[#e0aa1f] transition hover:scale-105 relative shadow-sm">
-                    Login
-                  </button>
-                </Link>
-              )}
+              {/* Directly showing Call Now button with tel link */}
+              <a href="tel:+918511962244">
+                <button className="shrink-0 mt-1 bg-[#f2b822] w-24 h-10 flex items-center justify-center rounded-full text-gray-900 font-semibold hover:bg-[#e0aa1f] transition hover:scale-105 relative shadow-sm cursor-pointer">
+                  Call Now
+                </button>
+              </a>
+              {/* <a href="tel:+918511962244">
+                <button className="shrink-0 mt-1 bg-[#f2b822] w-44 h-10 flex items-center justify-center rounded-full text-gray-900 font-semibold hover:bg-[#e0aa1f] transition hover:scale-105 relative shadow-sm cursor-pointer">
+                  Download Brochure
+                </button>
+              </a> */}
 
               <button
                 className="lg:hidden text-gray-700 hover:text-yellow-500 transition"
@@ -320,7 +291,11 @@ const Header = () => {
 
         {/* --- MOBILE MENU --- */}
         <div
-          className={`lg:hidden absolute top-full left-0 w-full bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out border-t ${isMobileMenuOpen ? "max-h-screen opacity-100 py-4" : "max-h-0 opacity-0 py-0 border-transparent"}`}
+          className={`lg:hidden absolute top-full left-0 w-full bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out border-t ${
+            isMobileMenuOpen
+              ? "max-h-screen opacity-100 py-4"
+              : "max-h-0 opacity-0 py-0 border-transparent"
+          }`}
         >
           <div className="px-4 space-y-2">
             {navLinks.map((link) => {
@@ -329,7 +304,11 @@ const Header = () => {
                 <div key={link.name}>
                   <Link
                     href={link.path}
-                    className={`block py-3 px-4 rounded-md font-medium transition ${isActive ? "bg-yellow-50 text-yellow-600" : "text-gray-700 hover:bg-gray-50 hover:text-yellow-500"}`}
+                    className={`block py-3 px-4 rounded-md font-medium transition ${
+                      isActive
+                        ? "bg-yellow-50 text-yellow-600"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-yellow-500"
+                    }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}

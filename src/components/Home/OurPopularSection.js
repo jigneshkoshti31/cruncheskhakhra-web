@@ -13,7 +13,7 @@ const playfair = Playfair_Display({
 const products = [
   {
     id: 1,
-    name: "Achari Khakhra (Jain)",
+    name: "Jeera Masala Khakhra",
     des: "Classic & wholesome traditional khakhra",
     image: "/img/achari.jpeg",
     price: 120,
@@ -23,7 +23,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Peri Peri Khakhra (Jain)",
+    name: "Masala Khakhra",
     des: "Classic & wholesome traditional khakhra",
     image: "/img/periperi.jpg",
     price: 130,
@@ -33,7 +33,7 @@ const products = [
   },
   {
     id: 3,
-    name: "Manchurian Khakhra",
+    name: "Methi Khakhra",
     des: "Classic & wholesome traditional khakhra",
     image: "/img/Methi.JPG",
     price: 125,
@@ -43,9 +43,9 @@ const products = [
   },
   {
     id: 4,
-    name: "Achari Khakhra (Jain)",
+    name: "Plain Jeera Khakhra",
     des: "Classic & wholesome traditional khakhra",
-    image: "/img/achari.jpeg",
+    image: "/img/social-img/DPP01146.jpg",
     price: 120,
     oldPrice: 150,
     rating: 4.5,
@@ -53,9 +53,9 @@ const products = [
   },
   {
     id: 5,
-    name: "Peri Peri Khakhra (Jain)",
+    name: "Jeera Khakhra",
     des: "Classic & wholesome traditional khakhra",
-    image: "/img/periperi.jpg",
+    image: "/img/social-img/17.jpg",
     price: 130,
     oldPrice: null,
     rating: 5,
@@ -63,9 +63,9 @@ const products = [
   },
   {
     id: 6,
-    name: "Manchurian Khakhra",
+    name: "Methi Masala Khakhra",
     des: "Classic & wholesome traditional khakhra",
-    image: "/img/Methi.JPG",
+    image: "/img/social-img/22.JPG",
     price: 125,
     oldPrice: null,
     rating: 4,
@@ -146,49 +146,22 @@ const PopularKhakhraSection = () => {
                 </div>
 
                 {/* Content */}
-                  <div className="flex items-center w-full justify-between">
-                    <h3 className="font-bold md:text-lg text-base text-gray-800 group-hover:text-primary_color transition">
-                      {item.name}
-                    </h3>
-                    {/* Button */}
-                    <button
-                      onClick={() => handleAddToCart(item)}
-                      className={`${
-                        isItemInCart
-                          ? "bg-primary_color text-white"
-                          : "bg-orange-100 text-primary_color"
-                      } text-xl md:w-10 md:h-10 w-10 h-8 flex items-center justify-center rounded-full hover:bg-primary_color hover:text-white transition transform hover:-translate-y-1`}
-                    >
-                      {isItemInCart ? (
-                        <i className="fa-solid fa-check"></i>
-                      ) : (
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                          />
-                        </svg>
-                      )}
-                    </button>
-                  </div>
+                <div className="flex items-center w-full justify-between">
+                  <h3 className="font-bold md:text-lg text-base text-gray-800 group-hover:text-primary_color transition">
+                    {item.name}
+                  </h3>
+                </div>
 
-                  <p className="text-sm text-gray-500">{item.des}</p>
+                <p className="text-sm text-gray-500">{item.des}</p>
 
-                  {/* Rating */}
-                  <div className="text-yellow-400 text-sm my-1">
+                {/* Rating */}
+                {/* <div className="text-yellow-400 text-sm my-1">
                     {"★".repeat(Math.floor(item.rating))}
                     {item.rating % 1 !== 0 && "☆"}
-                  </div>
+                  </div> */}
 
-                  {/* Price */}
-                  <div className="mt-2 flex items-center gap-2">
+                {/* Price */}
+                {/* <div className="mt-2 flex items-center gap-2">
                     <span className="text-xl font-bold text-primary_color">
                       ₹{item.price}
                     </span>
@@ -198,7 +171,8 @@ const PopularKhakhraSection = () => {
                         ₹{item.oldPrice}
                       </span>
                     )}
-                  </div>
+
+                  </div> */}
               </div>
             );
           })}

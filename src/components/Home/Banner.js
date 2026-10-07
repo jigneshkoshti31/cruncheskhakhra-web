@@ -66,10 +66,11 @@ const Banner = () => {
           </a>
 
           <a
-            href="/user/product"
+            href="/Crunches Brochure_Eng.pdf"
+            download="Crunches-Khakhra-Brochure.pdf"
             className="bg-[rgba(244, 182, 24, 0.1)] hover:bg-white text-white hover:text-primary_color border border-white px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:-translate-y-1"
           >
-            Buy Now
+            Download Brochure
           </a>
         </div>
       </div>

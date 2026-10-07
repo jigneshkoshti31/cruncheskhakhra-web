@@ -5,220 +5,18 @@ import Link from "next/link";
 import { useCart } from "@/components/context/CartContext";
 import toast, { Toaster } from "react-hot-toast";
 import { FaShoppingCart } from "react-icons/fa";
-
-// --- MOCK DATA ---
-const MOCK_PRODUCTS = [
-  {
-    id: 1,
-    name: "Methi Khakhra (Jain)",
-    desc: "Classic & wholesome traditional khakhra",
-    rating: 4.8,
-    reviews: 284,
-    price: 200,
-    oldPrice: 250,
-    flavor: "Methi",
-    type: "Regular",
-    image: "/img/social-img/17.jpg",
-  },
-  {
-    id: 2,
-    name: "Masala Khakhra",
-    desc: "Spicy and crispy daily snack",
-    rating: 4.5,
-    reviews: 150,
-    price: 210,
-    oldPrice: 260,
-    flavor: "Masala",
-    type: "Coin",
-    image: "/img/social-img/19.jpg",
-  },
-  {
-    id: 3,
-    name: "Jeera Khakhra",
-    desc: "Roasted cumin flavored light snack",
-    rating: 4.9,
-    reviews: 310,
-    price: 190,
-    oldPrice: 240,
-    flavor: "Jeera",
-    type: "Mobile",
-    image: "/img/social-img/25.jpg.jpeg",
-  },
-  {
-    id: 4,
-    name: "Plain Khakhra (Jain)",
-    desc: "Simple, diet-friendly classic khakhra",
-    rating: 4.2,
-    reviews: 95,
-    price: 180,
-    oldPrice: 220,
-    flavor: "Plain",
-    type: "Regular",
-    image: "/img/social-img/26.jpg",
-  },
-  {
-    id: 5,
-    name: "Manchurian Khakhra",
-    desc: "Indo-Chinese fusion crispy treat",
-    rating: 4.6,
-    reviews: 420,
-    price: 230,
-    oldPrice: 280,
-    flavor: "Manchurian",
-    type: "Coin",
-    image: "/img/social-img/26.jpg",
-  },
-  {
-    id: 6,
-    name: "Maggi Khakhra",
-    desc: "Kids favorite noodle masala flavor",
-    rating: 4.7,
-    reviews: 500,
-    price: 220,
-    oldPrice: 270,
-    flavor: "Maggi",
-    type: "Regular",
-    image: "/img/social-img/19.jpg",
-  },
-  {
-    id: 7,
-    name: "Methi Khakhra (Jain)",
-    desc: "Classic & wholesome traditional khakhra",
-    rating: 4.8,
-    reviews: 284,
-    price: 200,
-    oldPrice: 250,
-    flavor: "Methi",
-    type: "Regular",
-    image: "/img/social-img/17.jpg",
-  },
-  {
-    id: 8,
-    name: "Masala Khakhra",
-    desc: "Spicy and crispy daily snack",
-    rating: 4.5,
-    reviews: 150,
-    price: 210,
-    oldPrice: 260,
-    flavor: "Masala",
-    type: "Coin",
-    image: "/img/social-img/19.jpg",
-  },
-  {
-    id: 9,
-    name: "Jeera Khakhra",
-    desc: "Roasted cumin flavored light snack",
-    rating: 4.9,
-    reviews: 310,
-    price: 190,
-    oldPrice: 240,
-    flavor: "Jeera",
-    type: "Mobile",
-    image: "/img/social-img/25.jpg.jpeg",
-  },
-  {
-    id: 10,
-    name: "Plain Khakhra (Jain)",
-    desc: "Simple, diet-friendly classic khakhra",
-    rating: 4.2,
-    reviews: 95,
-    price: 180,
-    oldPrice: 220,
-    flavor: "Plain",
-    type: "Regular",
-    image: "/img/social-img/26.jpg",
-  },
-  {
-    id: 11,
-    name: "Manchurian Khakhra",
-    desc: "Indo-Chinese fusion crispy treat",
-    rating: 4.6,
-    reviews: 420,
-    price: 230,
-    oldPrice: 280,
-    flavor: "Manchurian",
-    type: "Coin",
-    image: "/img/social-img/17.jpg",
-  },
-  {
-    id: 12,
-    name: "Maggi Khakhra",
-    desc: "Kids favorite noodle masala flavor",
-    rating: 4.7,
-    reviews: 500,
-    price: 220,
-    oldPrice: 270,
-    flavor: "Maggi",
-    type: "Regular",
-    image: "/img/social-img/19.jpg",
-  },
-  {
-    id: 13,
-    name: "Masala Khakhra",
-    desc: "Spicy and crispy daily snack",
-    rating: 4.5,
-    reviews: 150,
-    price: 210,
-    oldPrice: 260,
-    flavor: "Masala",
-    type: "Coin",
-    image: "/img/social-img/19.jpg",
-  },
-  {
-    id: 14,
-    name: "Jeera Khakhra",
-    desc: "Roasted cumin flavored light snack",
-    rating: 4.9,
-    reviews: 310,
-    price: 190,
-    oldPrice: 240,
-    flavor: "Jeera",
-    type: "Mobile",
-    image: "/img/social-img/25.jpg.jpeg",
-  },
-  {
-    id: 15,
-    name: "Plain Khakhra",
-    desc: "Simple, diet-friendly classic khakhra",
-    rating: 4.2,
-    reviews: 95,
-    price: 180,
-    oldPrice: 220,
-    flavor: "Plain",
-    type: "Regular",
-    image: "/img/social-img/26.jpg",
-  },
-  {
-    id: 16,
-    name: "Plain Khakhra",
-    desc: "Simple, diet-friendly classic khakhra",
-    rating: 4.2,
-    reviews: 95,
-    price: 180,
-    oldPrice: 220,
-    flavor: "Plain",
-    type: "Regular",
-    image: "/img/social-img/26.jpg",
-  },
-];
-
-const FLAVORS = [
-  "All",
-  "Masala",
-  "Plain",
-  "Methi",
-  "Jeera",
-  "Maggi",
-  "Manchurian",
-];
-const TYPES = ["All", "Regular", "Coin", "Mobile"];
+import { MOCK_PRODUCTS, FLAVORS, Variants, REGULAR } from "./MockData";
 
 const ProductListing = () => {
   const [activeFlavor, setActiveFlavor] = useState("All");
-  const [activeType, setActiveType] = useState("All");
+  const [activeTypeVariant, setActiveTypeVariant] = useState("All");
+  const [activeregular, setActiveregular] = useState("All");
   const [sortBy, setSortBy] = useState("Popularity");
   const [products, setProducts] = useState(MOCK_PRODUCTS);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [showAllRegular, setShowAllRegular] = useState(false);
+const [showAllFlavors, setShowAllFlavors] = useState(false);
 
   // --- PAGINATION STATES ---
   const [currentPage, setCurrentPage] = useState(1);
@@ -232,19 +30,23 @@ const ProductListing = () => {
     const timer = setTimeout(() => {
       let filtered = [...MOCK_PRODUCTS];
 
+      if (activeTypeVariant !== "All") {
+        filtered = filtered.filter((p) => p.Variants === activeTypeVariant);
+      }
       if (activeFlavor !== "All") {
         filtered = filtered.filter((p) => p.flavor === activeFlavor);
       }
-      if (activeType !== "All") {
-        filtered = filtered.filter((p) => p.type === activeType);
+      if (activeregular !== "All") {
+        filtered = filtered.filter((p) => p.Regular === activeregular);
       }
+      
 
       setProducts(filtered);
       setIsLoading(false);
     }, 600);
 
     return () => clearTimeout(timer);
-  }, [activeFlavor, activeType, sortBy]);
+  }, [activeFlavor, activeTypeVariant, sortBy, activeregular]);
 
   // --- CALCULATE PAGINATION ---
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -259,58 +61,127 @@ const ProductListing = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // --- FILTER HANDLERS ---
+  const handleRegularClick = (regularValue) => {
+    setActiveregular(regularValue);
+    if (regularValue !== "All") {
+      setActiveFlavor("All");
+      setActiveTypeVariant("All");
+    }
+  };
+
+  const handleFlavorClick = (flavorValue) => {
+    setActiveFlavor(flavorValue);
+    if (flavorValue !== "All") {
+      setActiveregular("All");
+    }
+  };
+
+  const handleVariantClick = (variantValue) => {
+    setActiveTypeVariant(variantValue);
+    // Optional: If variant is clicked, reset Regular? 
+    // Based on requirement: "regular me flavours and variants ko check nai kar sakta"
+    if (variantValue !== "All") {
+       setActiveregular("All");
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-2 sm:px-2 lg:px-8 py-4 md:py-12 bg-[#FDFBF7]">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-col lg:flex-row gap-3 md:gap-8">
-        {/* --- SIDEBAR FILTERS --- */}
-        <aside className="w-full lg:w-1/4 shrink-0">
-          <div className="bg-white p-3 md:p-6 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 sticky top-24">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 md:mb-6">
-              Filters
-            </h2>
+       
+<aside className="w-full lg:w-1/4 shrink-0">
+  <div className="bg-white p-3 md:p-6 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 sticky top-24">
+    <h2 className="text-xl font-bold text-gray-800 mb-3 md:mb-6">
+      Filters
+    </h2>
 
-            {/* Flavors Filter */}
-            <div className="mb-4 md:mb-8">
-              <h3 className="font-semibold text-gray-700 mb-4">Flavors</h3>
-              <div className="flex flex-wrap gap-2">
-                {FLAVORS.map((flavor) => (
-                  <button
-                    key={flavor}
-                    onClick={() => setActiveFlavor(flavor)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                      activeFlavor === flavor
-                        ? "bg-[#C8102E] text-white shadow-md shadow-red-200 scale-105"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    {flavor}
-                  </button>
-                ))}
-              </div>
-            </div>
+    {/* Regular Filter */}
+    <div className="mb-4 md:mb-8">
+      <h3 className="font-semibold text-gray-700 mb-4">Regular</h3>
+      <div className="flex flex-wrap gap-2">
+        {/* Shuru ke 8 Regular dikhayein */}
+        {REGULAR.slice(0, showAllRegular ? REGULAR.length : 8).map(
+          (Regular) => (
+            <button
+              key={Regular}
+              onClick={() => handleRegularClick(Regular)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeregular === Regular
+                  ? "bg-[#C8102E] text-white shadow-md shadow-red-200 scale-105"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              {Regular}
+            </button>
+          )
+        )}
+        {/* Show More / Show Less Button for Regular */}
+        {REGULAR.length > 8 && (
+          <button
+            onClick={() => setShowAllRegular(!showAllRegular)}
+            className="px-4 py-2 text-sm font-medium text-[#C8102E] hover:underline"
+          >
+            {showAllRegular ? "Show Less" : `+${REGULAR.length - 8} More`}
+          </button>
+        )}
+      </div>
+    </div>
 
-            {/* Type Filter */}
-            <div className="mb-4 md:mb-8">
-              <h3 className="font-semibold text-gray-700 mb-4">Variants</h3>
-              <div className="flex flex-wrap gap-2">
-                {TYPES.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setActiveType(type)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                      activeType === type
-                        ? "bg-[#C8102E] text-white shadow-md shadow-red-200 scale-105"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </aside>
+    {/* Flavors Filter */}
+    <div className="mb-4 md:mb-8">
+      <h3 className="font-semibold text-gray-700 mb-4">Flavours</h3>
+      <div className="flex flex-wrap gap-2">
+        {/* Shuru ke 8 Flavors dikhayein */}
+        {FLAVORS.slice(0, showAllFlavors ? FLAVORS.length : 8).map(
+          (flavor) => (
+            <button
+              key={flavor}
+              onClick={() => handleFlavorClick(flavor)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeFlavor === flavor
+                  ? "bg-[#C8102E] text-white shadow-md shadow-red-200 scale-105"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              {flavor}
+            </button>
+          )
+        )}
+        {/* Show More / Show Less Button for Flavors */}
+        {FLAVORS.length > 8 && (
+          <button
+            onClick={() => setShowAllFlavors(!showAllFlavors)}
+            className="px-4 py-2 text-sm font-medium text-[#C8102E] hover:underline"
+          >
+            {showAllFlavors ? "Show Less" : `+${FLAVORS.length - 8} More`}
+          </button>
+        )}
+      </div>
+    </div>
+
+    {/* Type Filter */}
+    <div className="mb-4 md:mb-8">
+      <h3 className="font-semibold text-gray-700 mb-4">Variants</h3>
+      <div className="flex flex-wrap gap-2">
+        {Variants.map((Variants) => (
+          <button
+            key={Variants}
+            onClick={() => handleVariantClick(Variants)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              activeTypeVariant === Variants
+                ? "bg-[#C8102E] text-white shadow-md shadow-red-200 scale-105"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            {Variants}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</aside>
 
         {/* --- PRODUCT GRID --- */}
         <div className="w-full lg:w-3/4">
@@ -398,7 +269,8 @@ const ProductListing = () => {
                 <button
                   onClick={() => {
                     setActiveFlavor("All");
-                    setActiveType("All");
+                    setActiveTypeVariant("All");
+                    setActiveregular("All");
                   }}
                   className="mt-6 px-6 py-2 bg-[#C8102E] text-white rounded-full"
                 >
@@ -477,35 +349,6 @@ const ProductListing = () => {
 
 // --- SUB-COMPONENTS (Card & Skeleton) ---
 const ProductCard = ({ product }) => {
-  const { addToCart, cartItems } = useCart();
-
-  const isInCart = cartItems?.some((item) => item.id === product.id);
-
-  const handleAddToCart = (e) => {
-    console.log(handleAddToCart);
-    e.preventDefault();
-    e.stopPropagation(); // Link ko trigger hone se rokne ke liye
-
-    if (isInCart) {
-      // 4. Toast for already added
-      toast.error("This item is already in your cart.", {
-        style: { borderRadius: "10px", background: "#333", color: "#fff" },
-      });
-    } else {
-      addToCart(product);
-      // 5. Toast for success
-      toast.success(`${product.name} Item added to your cart successfully!`, {
-        // style: { borderRadius: '10px', background: '#333', color: '#fff' },
-        icon: (
-          <FaShoppingCart
-            size={42}
-            color="#4ade80" // green color
-          />
-        ),
-      });
-      console.log(addToCart, product, "addToCart");
-    }
-  };
   return (
     <Link href={`/user/product-details/${product.id}`}>
       <div className="group bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
@@ -524,54 +367,15 @@ const ProductCard = ({ product }) => {
           <p className="text-sm text-gray-500 mt-1 line-clamp-1">
             {product.desc}
           </p>
-          <div className="flex items-center gap-1 mt-2 mb-4 text-sm font-medium text-gray-700">
-            <svg
-              className="w-4 h-4 text-yellow-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            {product.rating}{" "}
-            <span className="text-gray-400 text-xs">({product.reviews})</span>
-          </div>
         </div>
         <div className="flex justify-between items-center mt-auto md:pt-4 pt-2 border-t border-gray-50">
           <div>
-            <span className="text-xl font-bold text-[#C8102E]">
-              ₹{product.price}
-            </span>
-            <span className="ml-2 text-sm text-gray-400 line-through">
-              ₹{product.oldPrice}
-            </span>
+            <a href="tel:+918511962244">
+                <button className="shrink-0 mt-1 bg-[#f2b822] w-32 h-10 flex items-center justify-center rounded-full text-gray-900 font-semibold hover:bg-[#e0aa1f] transition hover:scale-105 relative shadow-sm cursor-pointer">
+                  Enquiry now
+                </button>
+              </a>
           </div>
-          
-          <button
-                     onClick={handleAddToCart}
-                    className={`${
-                      isInCart
-                        ? "bg-primary_color text-white"
-                        : "bg-orange-100 text-primary_color"
-                    } text-xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary_color hover:text-white transition transform hover:-translate-y-1`}
-                  >
-                    {isInCart ? (
-                      <i className="fa-solid fa-check"></i>
-                    ) : (
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    )}
-                  </button>
         </div>
       </div>
     </Link>
