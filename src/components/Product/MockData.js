@@ -1,18 +1,41 @@
 export const MOCK_PRODUCTS = [
   {
     id: 1,
+    name: "Methi Khakhra",
+    desc: "Kids favorite noodle masala flavor",
+    Regular: "Methi",
+    image: "/img/social-img/19.jpg",
+  },
+   {
+    id: 2,
+    name: "Masala Khakhra",
+    desc: "Spicy & tangy Indo-Chinese flavor",
+    Regular: "Masala",
+    image: "/img/social-img/25.jpg.jpeg",
+  },
+   {
+    id: 3,
+    name: "Plain Khakhra",
+    desc: "Spicy & tangy Indo-Chinese flavor",
+    Regular: "Plain",
+    image: "/img/Photos/1.jpg (1).jpeg",
+  },
+  {
+    id: 4,
     name: "Jeera Khakhra",
     desc: "Roasted cumin flavored light snack",
     Regular: "Jeera",
-    image: "/img/social-img/25.jpg.jpeg",
+    image: "/img/social-img/26.jpg",
   },
   {
-    id: 2,
-    name: "Maggi Khakhra",
-    desc: "Kids favorite noodle masala flavor",
-    flavor: "Maggi",
-    image: "/img/social-img/19.jpg",
+    id: 5,
+    name: "Masala Jeera Khakhra",
+    desc: "Roasted cumin flavored light snack",
+    Regular: "Masala Jeera",
+    image: "/img/Photos/24.jpg.jpeg",
   },
+  
+ 
   
   
 

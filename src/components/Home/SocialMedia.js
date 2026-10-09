@@ -9,16 +9,26 @@ const playfair = Playfair_Display({
   weight: ["600", "700"],
 });
 
+// Yahan maine har image ke saath 'link' add kar diya hai
 const columns = [
   {
     id: 1,
     width: "w-[480px]",
     layout: [
-      { type: "single", height: "h-[250px]", img: "/img/social-img/14.jpg" },
+      { 
+        type: "single", 
+        height: "h-[250px]", 
+        img: "/img/social-img/14.jpg",
+        link: "https://www.instagram.com/p/DeO7_P2CQzj/" // Apna exact post link yahan dalein
+      },
       {
         type: "double",
         height: "h-[250px]",
-        imgs: ["/img/social-img/17.jpg", "/img/social-img/19.jpg"],
+        // Double image ke liye array of objects banaya hai jisme link aur img dono hain
+        items: [
+          { img: "/img/social-img/17.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
+          { img: "/img/social-img/19.jpg", link: "https://www.instagram.com/cruncheskhakhra/" }
+        ],
       },
     ],
   },
@@ -26,11 +36,12 @@ const columns = [
     id: 2,
     width: "w-[240px]",
     layout: [
-      { type: "single", height: "h-[180px]", img: "/img/social-img/22.jpg" },
+      { type: "single", height: "h-[180px]", img: "/img/social-img/22.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
       {
         type: "single",
         height: "h-[320px]",
         img: "/img/social-img/25.jpg.jpeg",
+        link: "https://www.instagram.com/cruncheskhakhra/"
       },
     ],
   },
@@ -38,8 +49,8 @@ const columns = [
     id: 3,
     width: "w-[240px]",
     layout: [
-      { type: "single", height: "h-[280px]", img: "/img/social-img/26.jpg" },
-      { type: "single", height: "h-[220px]", img: "/img/social-img/8.jpg" },
+      { type: "single", height: "h-[280px]", img: "/img/social-img/26.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
+      { type: "single", height: "h-[220px]", img: "/img/social-img/8.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
     ],
   },
   {
@@ -50,11 +61,15 @@ const columns = [
         type: "single",
         height: "h-[250px]",
         img: "/img/social-img/DPP01130.JPG",
+        link: "https://www.instagram.com/cruncheskhakhra/"
       },
       {
         type: "double",
         height: "h-[250px]",
-        imgs: ["/img/social-img/DPP01146.JPG", "/img/social-img/DPP01199.JPG"],
+        items: [
+          { img: "/img/social-img/DPP01146.JPG", link: "https://www.instagram.com/cruncheskhakhra/" },
+          { img: "/img/social-img/DPP01199.JPG", link: "https://www.instagram.com/cruncheskhakhra/" }
+        ],
       },
     ],
   },
@@ -62,11 +77,12 @@ const columns = [
     id: 5,
     width: "w-[240px]",
     layout: [
-      { type: "single", height: "h-[180px]", img: "/img/social-img/22.jpg" },
+      { type: "single", height: "h-[180px]", img: "/img/social-img/22.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
       {
         type: "single",
         height: "h-[320px]",
         img: "/img/social-img/25.jpg.jpeg",
+        link: "https://www.instagram.com/cruncheskhakhra/"
       },
     ],
   },
@@ -74,16 +90,16 @@ const columns = [
     id: 6,
     width: "w-[240px]",
     layout: [
-      { type: "single", height: "h-[280px]", img: "/img/social-img/26.jpg" },
-      { type: "single", height: "h-[220px]", img: "/img/social-img/8.jpg" },
+      { type: "single", height: "h-[280px]", img: "/img/social-img/26.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
+      { type: "single", height: "h-[220px]", img: "/img/social-img/8.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
     ],
   },
   {
     id: 7,
     width: "w-[240px]",
     layout: [
-      { type: "single", height: "h-[220px]", img: "/img/social-img/26.jpg" },
-      { type: "single", height: "h-[280px]", img: "/img/social-img/8.jpg" },
+      { type: "single", height: "h-[220px]", img: "/img/social-img/26.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
+      { type: "single", height: "h-[280px]", img: "/img/social-img/8.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
     ],
   },
 ];
@@ -94,12 +110,17 @@ const SocialMedia = () => {
       
       {/* Heading */}
       <div className="max-w-7xl mx-auto px-4 text-center mb-12">
-        <div className="inline-flex items-center justify-center w-12 h-12 bg-[#c0182c] text-white rounded-full mb-4 shadow-lg">
+        <a 
+          href="https://www.instagram.com/cruncheskhakhra/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center w-12 h-12 bg-[#c0182c] text-white rounded-full mb-4 shadow-lg hover:scale-110 transition-transform cursor-pointer"
+        >
           <i className="fa-brands fa-instagram text-2xl"></i>
-        </div>
+        </a>
 
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-wide">
-          Follow <span className="text-[#c0182c]">@Cruncheskhakhra</span>
+          Follow <a href="https://www.instagram.com/cruncheskhakhra/" target="_blank" rel="noopener noreferrer" className="text-[#c0182c] hover:underline cursor-pointer">@Cruncheskhakhra</a>
         </h2>
 
         <p className="text-gray-600 font-medium">
@@ -118,33 +139,47 @@ const SocialMedia = () => {
               
               {col.layout.map((item, index) =>
                 item.type === "single" ? (
-                  <div
+                  // Yahan maine a tag use kiya hai
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     key={index}
-                    className={`${item.height} rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition`}
+                    className={`block ${item.height} rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition relative group cursor-pointer`}
                   >
                     <Image
                       src={item.img}
-                      alt="social"
+                      alt="Instagram post"
                       width={500}
                       height={500}
-                      className="w-full h-full object-cover hover:scale-110 transition duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                     />
-                  </div>
+                    {/* Hover karne par chota sa instagram icon dikhega (Optional, premium look ke liye) */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                       <i className="fa-brands fa-instagram text-white text-3xl"></i>
+                    </div>
+                  </a>
                 ) : (
                   <div key={index} className={`flex gap-4 ${item.height}`}>
-                    {item.imgs.map((img, i) => (
-                      <div
+                    {item.items.map((subItem, i) => (
+                      <a
+                        href={subItem.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         key={i}
-                        className="w-1/2 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+                        className="block w-1/2 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition relative group cursor-pointer"
                       >
                         <Image
-                          src={img}
-                          alt="social"
+                          src={subItem.img}
+                          alt="Instagram post"
                           width={500}
                           height={500}
-                          className="w-full h-full object-cover hover:scale-110 transition duration-500"
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                         />
-                      </div>
+                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                           <i className="fa-brands fa-instagram text-white text-3xl"></i>
+                        </div>
+                      </a>
                     ))}
                   </div>
                 )
