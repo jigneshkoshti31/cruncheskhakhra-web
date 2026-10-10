@@ -153,14 +153,14 @@ const GalleryPage = () => {
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-[#005A32]/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                  {/* <div className="absolute inset-0 bg-linear-to-t from-[#005A32]/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <span className="inline-block px-3 py-1 bg-[#E8A51D] text-white text-xs font-bold rounded-full mb-2 w-max">
                       {product.category}
                     </span>
                     <h3 className="text-white text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                       {product.title}
                     </h3>
-                  </div>
+                  </div> */}
                 </div>
               ))}
         </div>
