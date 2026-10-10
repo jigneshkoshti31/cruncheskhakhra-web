@@ -19,7 +19,7 @@ const columns = [
         type: "single", 
         height: "h-[250px]", 
         img: "/img/social-img/14.jpg",
-        link: "https://www.instagram.com/p/DeO7_P2CQzj/" // Apna exact post link yahan dalein
+        link: "https://www.instagram.com/cruncheskhakhra/"
       },
       {
         type: "double",
@@ -98,8 +98,8 @@ const columns = [
     id: 7,
     width: "w-[240px]",
     layout: [
-      { type: "single", height: "h-[220px]", img: "/img/social-img/26.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
       { type: "single", height: "h-[280px]", img: "/img/social-img/8.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
+      { type: "single", height: "h-[220px]", img: "/img/social-img/26.jpg", link: "https://www.instagram.com/cruncheskhakhra/" },
     ],
   },
 ];

@@ -40,27 +40,29 @@ export const MOCK_PRODUCTS = [
   
 
 //   {Coin Khakhra}--------------------------
+{
+    id: 6,
+    name: "Schezwan Khakhra",
+    desc: "Spicy & tangy Indo-Chinese Schezwan flavor",
+    // flavor: "Maggi",
+    type: "Coin",
+    Variants: "Coin",
+    image: "/img/Photos/40 New ++.jpg.jpeg", 
+  },
+  {
+    id: 7,
+    name: "Manchurian Khakhra",
+    desc: "Indo-Chinese fusion crispy treat",
+    // flavor: "Manchurian",
+    type: "Coin",
+    Variants: "Coin",
+    image: "/img/Photos/42 New ++.jpg.jpeg",
+  },
 // {
-//     id: 9,
-//     name: "Schezwan Khakhra",
-//     desc: "Spicy & tangy Indo-Chinese Schezwan flavor",
-//     flavor: "Maggi",
-//     type: "Coin",
-//     image: "/img/Photos/maggiecoin.jpeg", 
-//   },
-//   {
-//     id: 5,
-//     name: "Manchurian Khakhra",
-//     desc: "Indo-Chinese fusion crispy treat",
-//     flavor: "Manchurian",
-//     type: "Coin",
-//     image: "/img/social-img/26.jpg",
-//   },
-// {
-//     id: 2,
+//     id: 8,
 //     name: "Masala Khakhra",
 //     desc: "Spicy and crispy daily snack",
-//     flavor: "Masala",
+//     // flavor: "Masala",
 //     type: "Coin",
 //     image: "/img/social-img/19.jpg",
 //   },
